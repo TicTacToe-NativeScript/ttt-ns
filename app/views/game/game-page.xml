@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd">
   <StackLayout>
-    <Label text="Create game" textWrap="true" />
+    <Label text="Game" textWrap="true" />
     
   </StackLayout>
 </Page>

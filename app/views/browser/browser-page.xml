@@ -1,7 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   <StackLayout>
     <Label text="All games" class="title" textWrap="true" />
-    <ListView items="{{games}}" itemLoading="onItemLoading" loadMoreItems="{{loadMoreItems}}">
+    <ListView items="{{games}}" itemLoading="onItemLoading" loadMoreItems="{{loadMoreItems}}" itemTapEvent="{{ navigateToGamePage }}">
       <ListView.itemTemplate>
         <StackLayout style="padding: 10;" orientation="horizontal">
             <Label class="label-user" text="{{ creator.userName }}" textWrap="true" />

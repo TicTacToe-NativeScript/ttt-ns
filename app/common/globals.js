@@ -5,6 +5,4 @@ globals.BS_URL = "";
 globals.USER_ID = "userId";
 globals.TOKEN_DATA_KEY = "authenticationToken";
 
-module.exports = {
-    globals: globals
-}
+module.exports = globals;
