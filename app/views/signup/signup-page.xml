@@ -1,23 +1,29 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onLoaded" navigatedTo="onNavigatedTo">
-    <StackLayout>
-        <Label text="Tic-Tac-Toe" cssClass="app-name-label">
-        <Label text="Login" cssClass="login-label" textWrap="false" />
-        <StackLayout cssClass="horizontal-line">            
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="onNavigatedTo">
+    <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, *" cssClass="signup-layout">
+        <StackLayout cssClass="empty-line" row="0">            
         </StackLayout>
-        <GridLayout row="2" rows="auto, auto, auto, *">
-                <TextField id="email" cssClass="text-input" keyboardType="email" hint="e-mail" text="{{ email }}" row="0" />
-                <TextField id="password" cssClass="text-input" hint="password" secure="true" text="{{ password }}" row="1" />
-                <TextField id="username" cssClass="text-input" hint="name" text="{{ username }}" row="2" />
-                <Button text="Sign up" id="register" tap="signUp" cssClass="signup-button" row="3" verticalAlignment="bottom" />
-        </GridLayout >
-        <GridLayout rows="auto *" >       
-            <Label text="Already a member?" cssClass="label" />
-            <Button text="Login" id="login" tap="navigateToLogin" cssClass="signin-button" row="1" verticalAlignment="bottom" />
+        <StackLayout row="1">
+            <Label text="Tic-Tac-Toe" cssClass="app-name-label" />
+            <Label text="Sign up" cssClass="login-label" textWrap="false" />
+        </StackLayout>
+        <StackLayout cssClass="horizontal-line" row="2">            
+        </StackLayout>
+        <GridLayout rows="auto, auto, auto, auto" row="3">
+                <TextField id="email" cssClass="text-input" keyboardType="email" hint="E-mail" text="{{ email }}" row="0" />
+                <TextField id="password" cssClass="text-input" hint="Password" secure="true" text="{{ password }}" row="1" />
+                <TextField id="username" cssClass="text-input" hint="Display Name" text="{{ username }}" row="2" />
+                <Button text="Sign up" id="register" tap="btnSignUpTapped" cssClass="signup-button" row="3" />
         </GridLayout>
-        <StackLayout cssClass="empty-line">            
+        <StackLayout cssClass="empty-line" row="4">            
         </StackLayout>
-        <AbsoluteLayout cssClass="activity-indicator">
+        <GridLayout rows="auto *" verticalAlignment="bottom" row="5">
+            <Label text="Already a member?" cssClass="label" />
+            <Button text="Login" id="login" tap="btnSignInTapped" cssClass="signin-button" row="1" verticalAlignment="bottom" />
+        </GridLayout>        
+        <StackLayout cssClass="empty-line" row="6">
+        </StackLayout>
+        <AbsoluteLayout cssClass="activity-indicator" row="7">
           <ActivityIndicator busy="{{ isLoading }}" cssClass="activity-indicator" />
         </AbsoluteLayout>
-    </StackLayout>
+    </GridLayout>
 </Page>
