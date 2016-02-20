@@ -13,8 +13,13 @@ function btnJoinGameTapped(args) {
   viewModel.navigateToJoinGame(args);
 }
 
+function btnLogoutTapped(args) {
+  viewModel.logout(args);
+}
+
 module.exports = {
   pageLoaded,
   btnJoinGameTapped,
   btnCreateGameTapped,
+  btnLogoutTapped
 };

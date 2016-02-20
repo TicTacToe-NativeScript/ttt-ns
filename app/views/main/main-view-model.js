@@ -12,16 +12,16 @@ class MainViewModel extends Observable {
     frame.topmost()
       .navigate('./views/signup/signup-page');
   }
-  
-  navigateToJoinGame(args) {
-    frame.topmost()
-      .navigate('./views/browser/browser-page');
-  }
-  
-  navigateToCreateGame(args) {
-    frame.topmost()
-      .navigate('./views/game/create-page');
-  }
+    
+   navigateToSignIn(args) {
+        frame.topmost()
+            .navigate({
+              moduleName: './views/signin/signin-page',
+              animated: true,
+              transition: "flip",
+              backstackVisible: false
+            });
+    }
 }
 
 module.exports = {

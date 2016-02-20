@@ -24,12 +24,7 @@ function btnSignUpTapped(args) {
         });
 }
 
-function btnSignInTapped(args) {
-    viewModel.navigateToSignIn(args);
-}
-
 module.exports = {
     pageLoaded,
-    btnSignUpTapped,
-    btnSignInTapped
+    btnSignUpTapped
 };

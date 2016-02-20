@@ -5,19 +5,16 @@ function pageLoaded(args) {
     page.bindingContext = viewModel;
 }
 
-function btnCreateGameTapped(args) {
-  viewModel.navigateToCreateGame(args);
-}
-
-function btnJoinGameTapped(args) {
-  viewModel.navigateToJoinGame(args);
-}
-
 function btnSignUpTapped(args) {
   viewModel.navigateToSignUp(args);
 }
 
+function btnSignInTapped(args) {
+    viewModel.navigateToSignIn(args);
+}
+
 module.exports = {
   pageLoaded,
-  btnSignUpTapped
+  btnSignUpTapped,
+  btnSignInTapped
 };

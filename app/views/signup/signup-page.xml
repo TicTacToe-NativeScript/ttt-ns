@@ -1,5 +1,5 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="onNavigatedTo">
-    <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, *" cssClass="signup-layout">
+    <GridLayout rows="auto, auto, auto, auto, auto, auto, *" cssClass="signup-layout">
         <StackLayout cssClass="empty-line" row="0">            
         </StackLayout>
         <StackLayout row="1">
@@ -16,13 +16,10 @@
         </GridLayout>
         <StackLayout cssClass="empty-line" row="4">            
         </StackLayout>
-        <GridLayout rows="auto *" verticalAlignment="bottom" row="5">
-            <Label text="Already a member?" cssClass="label" />
-            <Button text="Login" id="login" tap="btnSignInTapped" cssClass="signin-button" row="1" verticalAlignment="bottom" />
-        </GridLayout>        
-        <StackLayout cssClass="empty-line" row="6">
+             
+        <StackLayout cssClass="empty-line" row="5">
         </StackLayout>
-        <AbsoluteLayout cssClass="activity-indicator" row="7">
+        <AbsoluteLayout cssClass="activity-indicator" row="6">
           <ActivityIndicator busy="{{ isLoading }}" cssClass="activity-indicator" />
         </AbsoluteLayout>
     </GridLayout>
