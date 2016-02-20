@@ -1,5 +1,5 @@
 'use strict';
-let viewModel = require('./game-page').gameViewModel;
+let viewModel = require('./game-view-model').gameViewModel;
 
 function pageLoaded(args) {
   let page = args.object;
@@ -7,7 +7,6 @@ function pageLoaded(args) {
 }
 
 function pageNavigatedTo(args) {
-  console.dir(args.context);
 }
 
 module.exports = {
