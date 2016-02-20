@@ -1,4 +1,4 @@
-var viewModel = require("./main-view-model").mainViewModel;
+var viewModel = require("./home-view-model").homeViewModel;
 
 function pageLoaded(args) {
     var page = args.object;
@@ -13,11 +13,8 @@ function btnJoinGameTapped(args) {
   viewModel.navigateToJoinGame(args);
 }
 
-function btnSignUpTapped(args) {
-  viewModel.navigateToSignUp(args);
-}
-
 module.exports = {
   pageLoaded,
-  btnSignUpTapped
+  btnJoinGameTapped,
+  btnCreateGameTapped,
 };

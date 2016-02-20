@@ -1,0 +1,7 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="onNavigatedTo">
+  <StackLayout>
+    <Label text="LE HOME" textWrap="true" />
+    <Button text="Join game" tap="btnJoinGameTapped" />
+    <Button text="Create new game" tap="btnCreateGameTapped" />    
+  </StackLayout>
+</Page>
