@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" onLoad="pageLoaded" navigatedTo="pageNavigatedTo">
   <StackLayout>
     <Label text="Game" textWrap="true" />
     
