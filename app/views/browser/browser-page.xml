@@ -1,6 +1,19 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   <StackLayout>
-    <Label text="All games" textWrap="true" />
-    
-  </StackLayout>
+    <Label text="All games" class="title" textWrap="true" />
+    <ListView items="{{games}}" itemLoading="onItemLoading" loadMoreItems="{{loadMoreItems}}">
+      <ListView.itemTemplate>
+        <StackLayout style="padding: 10;" orientation="horizontal">
+            <Label class="label-user" text="{{ creator.userName }}" textWrap="true" />
+            <StackLayout orientation="horizontal">
+                <Image src="~/resources/images/crown.png" stretch ="none" />
+                <Label class="label-user" text="{{ creator.wins }}" textWrap="true" />
+                <Image src="~/resources/images/skull.png" stretch ="none" />
+                <Label class="label-user" text="{{ creator.losses }}" textWrap="true" />
+                <Image src="{{ isPrivate ? '~/resources/images/private.png' : '~/resources/images/public.png' }}" stretch ="none" />
+            </StackLayout>
+        </StackLayout>
+      </ListView.itemTemplate>
+    </ListView>
+   </StackLayout>
 </Page>
