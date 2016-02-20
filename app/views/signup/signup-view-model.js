@@ -2,7 +2,9 @@
 
 let Observable = require("data/observable").Observable;
 let frame = require("ui/frame");
-let Everlive = require("../../lib/everlive.all.min.js"); 
+let Everlive = require("../../lib/everlive.all.min.js");
+let appSettings = require("application-settings");
+let globals = require("../../common/globals");
 
 class SignupViewModel extends Observable {
     constructor() {
@@ -29,13 +31,16 @@ class SignupViewModel extends Observable {
 
         let info = {
             DisplayName: this.username,
-            Email: this.email
+            Email: this.email,
+            GamesPlayed: 0,
+            GamesWon: 0,
+            GamesLost: 0
         };
-            
+
         let el = new Everlive({
-                appId: '46mdgkw9d134t4ao',
-                scheme: 'https',
-            });
+            appId: globals.BS_API_KEY,
+            scheme: 'https',
+        });
 
         return new Promise(function (resolve, reject) {
             // Todo: validate input
@@ -48,6 +53,10 @@ class SignupViewModel extends Observable {
                         el.Users.login(that.email, that.password,
                             function (data) {
                                 that.isLoading = false;
+
+                                appSettings.setString(globals.TOKEN_DATA_KEY, data.result.access_token);
+                                appSettings.setString(globals.USER_ID, data.result.principal_id);
+    
                                 // TODO: Clear fields
                                 resolve(data);
                             },
