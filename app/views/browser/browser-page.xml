@@ -1,0 +1,6 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+  <StackLayout>
+    <Label text="All games" textWrap="true" />
+    
+  </StackLayout>
+</Page>
