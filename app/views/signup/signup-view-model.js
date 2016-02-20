@@ -17,8 +17,9 @@ class SignupViewModel extends Observable {
     navigateToSignIn(args) {
         frame.topmost()
             .navigate({
-                animated: true,
-                transition: "flip"
+              moduleName: './views/signin/signin-page',
+              animated: true,
+              transition: "flip"
             });
     }
 
