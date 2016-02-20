@@ -1,0 +1,23 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onLoaded" navigatedTo="onNavigatedTo">
+    <StackLayout>
+        <Label text="Tic-Tac-Toe" cssClass="app-name-label">
+        <Label text="Login" cssClass="login-label" textWrap="false" />
+        <StackLayout cssClass="horizontal-line">            
+        </StackLayout>
+        <GridLayout row="2" rows="auto, auto, auto, *">
+                <TextField id="email" cssClass="text-input" keyboardType="email" hint="e-mail" text="{{ email }}" row="0" />
+                <TextField id="password" cssClass="text-input" hint="password" secure="true" text="{{ password }}" row="1" />
+                <TextField id="username" cssClass="text-input" hint="name" text="{{ username }}" row="2" />
+                <Button text="Sign up" id="register" tap="signUp" cssClass="signup-button" row="3" verticalAlignment="bottom" />
+        </GridLayout >
+        <GridLayout rows="auto *" >       
+            <Label text="Already a member?" cssClass="label" />
+            <Button text="Login" id="login" tap="navigateToLogin" cssClass="signin-button" row="1" verticalAlignment="bottom" />
+        </GridLayout>
+        <StackLayout cssClass="empty-line">            
+        </StackLayout>
+        <AbsoluteLayout cssClass="activity-indicator">
+          <ActivityIndicator busy="{{ isLoading }}" cssClass="activity-indicator" />
+        </AbsoluteLayout>
+    </StackLayout>
+</Page>
