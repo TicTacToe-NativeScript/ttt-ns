@@ -8,6 +8,7 @@ let userService = require('../../services/user-service').defaultInstance;
 class ProfileViewModel extends Observable {
   constructor() {
     super();
+    
     this.gameResults = new ObservableArray([]);
     this.currentGameResultIndex = 0;
     this.currentGameResult = null;
