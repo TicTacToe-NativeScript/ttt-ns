@@ -3,5 +3,6 @@
     <Label text="LE HOME" textWrap="true" />
     <Button text="Join game" tap="btnJoinGameTapped" />
     <Button text="Create new game" tap="btnCreateGameTapped" />    
+    <Button text="Logout" tap="btnLogoutTapped" />    
   </StackLayout>
 </Page>

@@ -1,8 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   <StackLayout>
-    <Button text="Join game" tap="btnJoinGameTapped" />
-    <Button text="Create new game" tap="btnCreateGameTapped" />
     <Button text="Sign Up" tap="btnSignUpTapped" />
-    
+    <GridLayout rows="auto *" verticalAlignment="bottom" row="5">
+            <Label text="Already a member?" cssClass="label" />
+            <Button text="Login" id="login" tap="btnSignInTapped" cssClass="signin-button" row="1" verticalAlignment="bottom" />
+    </GridLayout>   
   </StackLayout>
 </Page>

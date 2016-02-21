@@ -18,13 +18,10 @@ function btnLoginTap(args) {
       }).then(function() {
       frame.topmost()
         .navigate({
-          moduleName: './views/main/main-page',
-          backstackVisible: false
+          moduleName: './views/home/home-page'
         });
       });
     }, function (err) {
-      console.log('-------Error');
-      console.dir(err);
       dialogs.alert({
         title: 'Error',
         message: err.message
