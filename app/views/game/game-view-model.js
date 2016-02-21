@@ -43,7 +43,7 @@ class GameViewModel extends Observable {
         this.checkStatus();
     }
 
-    checkStatus(callback) {
+    checkStatus(playCallback, endGameCallback) {
         let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
         let that = this;
         data.getById(tempId) //this.gameId)
@@ -60,12 +60,48 @@ class GameViewModel extends Observable {
                     that.rebindBoard();
                 }
 
-                result = {
-                    gameOver: result.GameIsOver,
-                    hasPlayerTwo: result.Player2Id != null
-                };
-                
-                callback(result);
+                if (!that.canMakeAnyMoves()) {
+                    let winningPlayer = that.checkIfGameOver(1) == 1 ? 1 : that.checkIfGameOver(2) == 2 ? 2 : 0;
+                    let resultToReturn = {};
+                    let winningText = "Congratulations, you win!";
+                    let losingText = "Oh bummer, you lost! :(";
+                    let tieText = "It's a tie! You didn't win... but then again, you didn't lose either!";
+
+                    switch (winningPlayer) {
+                        case 1:
+                            data.updateSingle({ Id: tempId, 'Player1Won': true, 'GameIsOver': true },
+                                function (res) {
+                                    resultToReturn.message = that.iAmPlayerOne ? winningText : losingText;
+                                }, function (err) {
+                                    alert(JSON.stringify(err));
+                                    console.log(err);
+                                });
+                            break;
+                        case 2:
+                            data.updateSingle({ Id: tempId, 'Player2Won': true, 'GameIsOver': true },
+                                function (res) {
+                                    resultToReturn.message = that.iAmPlayerOne ? losingText : winningText;
+                                }, function (err) {
+                                    alert(JSON.stringify(err));
+                                    console.log(err);
+                                });
+                            break;
+                        case 0:
+                            data.updateSingle({ Id: tempId, 'GameIsOver': true },
+                                function (res) {
+                                    resultToReturn.message = tieText;
+                                }, function (err) {
+                                    alert(JSON.stringify(err));
+                                    console.log(err);
+                                });
+                            break;
+                    }
+                    
+                    endGameCallback(resultToReturn);
+                } else {
+                    playCallback(result);
+                }
+
             }, function (err) {
                 alert(JSON.stringify(err));
             });
@@ -97,26 +133,62 @@ class GameViewModel extends Observable {
             function (data) {
                 that.rebindBoard();
                 that.set("isPlayerOneTurn", !that.isPlayerOneTurn);
-                
+
                 result.success = true;
-                
+
                 callback(result);
             },
             function (error) {
                 alert(JSON.stringify(error));
-                
+
                 result.success = false;
                 result.message = error;
-                
+
                 callback(result)
             });
     }
-    
-    checkIfGameOver() {
-        
+
+    checkIfGameOver(player) {
+        if ((this.dbBoard[0] == player
+            && this.dbBoard[1] == player
+            && this.dbBoard[2] == player) ||
+            (this.dbBoard[0] == player
+                && this.dbBoard[4] == player
+                && this.dbBoard[8] == player) ||
+            (this.dbBoard[0] == player
+                && this.dbBoard[3] == player
+                && this.dbBoard[6] == player) ||
+            (this.dbBoard[6] == player
+                && this.dbBoard[7] == player
+                && this.dbBoard[8] == player) ||
+            (this.dbBoard[6] == player
+                && this.dbBoard[4] == player
+                && this.dbBoard[2] == player) ||
+            (this.dbBoard[2] == player
+                && this.dbBoard[5] == player
+                && this.dbBoard[8] == player)) {
+            return player;
+        } else {
+            return 0;
+        }
+    }
+
+    canMakeAnyMoves() {
+        for (let i = 0; i < this.dbBoard.length; i++) {
+            if (this.dbBoard[i] == 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 
 module.exports = {
     gameViewModel: new GameViewModel()
 };
+
+
+//  0  1  2
+//  3  4  5
+//  6  7  8
