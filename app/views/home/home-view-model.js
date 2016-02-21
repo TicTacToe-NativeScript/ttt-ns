@@ -20,6 +20,11 @@ class HomeViewModel extends Observable {
       .navigate('./views/create-game/create-game-page');
   }
 
+  navigateToProfile(args) {
+    frame.topmost()
+      .navigate('./views/profile/profile-page');
+  }
+
   logout(args) {
     userService.logout()
       .then(function () {

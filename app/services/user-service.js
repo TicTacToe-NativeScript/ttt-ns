@@ -53,17 +53,12 @@ class UserService extends BaseService {
               token: token,
               userId: userId
             });
-          }, function (err) {
-            reject(err);
-          })
+          }, reject)
           .then(function (setUserInfo) {
-            console.dir(setUserInfo);
-            return that.setCurrentUser(setUserInfo.token, setUserInfo.userId, setUserInfo.fullUser.Username);
+            return that.setCurrentUser(setUserInfo.token, setUserInfo.userId, setUserInfo.fullUser.DisplayName);
           })
           .then(resolve, reject);
-      }, function (err) {
-        reject(err);
-      });
+      }, reject);
     });
 
     return promise;

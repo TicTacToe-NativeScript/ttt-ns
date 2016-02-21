@@ -2,7 +2,8 @@
   <StackLayout>
     <Label text="LE HOME" textWrap="true" />
     <Button text="Join game" tap="btnJoinGameTapped" />
-    <Button text="Create new game" tap="btnCreateGameTapped" />    
+    <Button text="Create new game" tap="btnCreateGameTapped" />  
+    <Button text="Profile" tap="btnProfileTapped" />      
     <Button text="Logout" tap="btnLogoutTapped" />    
   </StackLayout>
 </Page>
