@@ -60,7 +60,8 @@ class GameViewModel extends Observable {
                     that.rebindBoard();
                 }
 
-                if (!that.canMakeAnyMoves()) {
+                if (!that.canMakeAnyMoves() || that.checkIfGameOver(1) == 1 || that.checkIfGameOver(2) == 2) {
+                    console.log("Inside end game condition");
                     let winningPlayer = that.checkIfGameOver(1) == 1 ? 1 : that.checkIfGameOver(2) == 2 ? 2 : 0;
                     let resultToReturn = {};
                     let winningText = "Congratulations, you win!";
@@ -69,41 +70,59 @@ class GameViewModel extends Observable {
 
                     switch (winningPlayer) {
                         case 1:
-                            data.updateSingle({ Id: tempId, 'Player1Won': true, 'GameIsOver': true },
-                                function (res) {
-                                    resultToReturn.message = that.iAmPlayerOne ? winningText : losingText;
-                                }, function (err) {
-                                    alert(JSON.stringify(err));
-                                    console.log(err);
-                                });
+                            console.log("Inside player 1 won");
+                            resultToReturn.message = that.iAmPlayerOne ? winningText : losingText;
+                            that.p1Won(resultToReturn.message, endGameCallback);
                             break;
                         case 2:
-                            data.updateSingle({ Id: tempId, 'Player2Won': true, 'GameIsOver': true },
-                                function (res) {
-                                    resultToReturn.message = that.iAmPlayerOne ? losingText : winningText;
-                                }, function (err) {
-                                    alert(JSON.stringify(err));
-                                    console.log(err);
-                                });
+                            console.log("Inside player 2 won");
+                            resultToReturn.message = that.iAmPlayerOne ? losingText : winningText;
+                            that.p2Won(resultToReturn.message, endGameCallback);
                             break;
                         case 0:
-                            data.updateSingle({ Id: tempId, 'GameIsOver': true },
-                                function (res) {
-                                    resultToReturn.message = tieText;
-                                }, function (err) {
-                                    alert(JSON.stringify(err));
-                                    console.log(err);
-                                });
+                            console.log("Inside no player won - tie");
+                            that.tie(tieText, endGameCallback);
                             break;
                     }
-                    
-                    endGameCallback(resultToReturn);
                 } else {
                     playCallback(result);
                 }
 
             }, function (err) {
                 alert(JSON.stringify(err));
+            });
+    }
+
+    p1Won(message, callback) {
+        let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
+        data.updateSingle({ Id: tempId, 'Player1Won': true, 'GameIsOver': true },
+            function (res) {
+                callback({ message: message });
+            }, function (err) {
+                alert(JSON.stringify(err));
+                console.log(err);
+            });
+    }
+
+    p2Won(message, callback) {
+        let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
+        data.updateSingle({ Id: tempId, 'Player2Won': true, 'GameIsOver': true },
+            function (res) {
+                callback({ message: message });
+            }, function (err) {
+                alert(JSON.stringify(err));
+                console.log(err);
+            });
+    }
+
+    tie(message, callback) {
+        let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
+        data.updateSingle({ Id: tempId, 'GameIsOver': true },
+            function (res) {
+                callback({ message: message });
+            }, function (err) {
+                alert(JSON.stringify(err));
+                console.log(err);
             });
     }
 
