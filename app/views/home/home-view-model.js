@@ -17,22 +17,23 @@ class HomeViewModel extends Observable {
 
   navigateToCreateGame(args) {
     frame.topmost()
-      .navigate('./views/game/create-page');
+      .navigate('./views/create-game/create-game-page');
   }
 
   logout(args) {
-    userService.logout();
-    
-    dialogs.alert({
-      title: 'Success',
-      message: 'Logout successful!',
-      okButtonText: 'Ok'
-    }).then(function(){
-      frame.topmost()
-        .navigate({
-          moduleName: './views/start/start-page'
+    userService.logout()
+      .then(function () {
+        dialogs.alert({
+          title: 'Success',
+          message: 'Logout successful!',
+          okButtonText: 'Ok'
+        }).then(function () {
+          frame.topmost()
+            .navigate({
+              moduleName: './views/start/start-page'
+            });
         });
-    });
+      });
   }
 }
 
