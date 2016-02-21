@@ -1,0 +1,11 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo">
+  <StackLayout>
+      <StackLayout orientation="horizontal">
+          <Label text="Private game" textWrap="true" />
+          <Switch checked="{{ isPrivate }}" />
+      </StackLayout>
+      <TextField hint="Password" secure="true" visibility="{{ isPrivate ? 'visible' : 'collapsed' }}" text="{{ password }}" />
+      <Button text="Create Game" tap="btnCreateGameTapped" />
+      
+  </StackLayout>
+</Page>
