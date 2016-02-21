@@ -28,6 +28,7 @@ function tapCell0() {
         // start ticking down timer
         // redrawBoard
         // remove event listener of this element
+            viewModel.checkStatus();
 }
 
 function tapCell1() {

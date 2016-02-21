@@ -5,15 +5,15 @@
         <Label text="{{secondPlayer.userName}}" textWrap="true" />
     </StackLayout>
     <GridLayout rows="*, *, *" columns="*, *, *" borderColor="black" borderWidth="2" row="1">
-        <Label tap="tapCell0" text="0, 0" row="0" col="0" borderColor="black" borderWidth="2"/>
-        <Label tap="tapCell1" text="0, 1" row="0" col="1" borderColor="black" borderWidth="2"/>
-        <Label tap="tapCell2" text="0, 2" row="0" col="2" borderColor="black" borderWidth="2"/>
-        <Label tap="tapCell3" text="1, 0" row="1" col="0" borderColor="black" borderWidth="2"/>
-        <Label tap="tapCell4" text="1, 1" row="1" col="1" borderColor="black" borderWidth="2"/>
-        <Label tap="tapCell5" text="1, 2" row="1" col="2" borderColor="black" borderWidth="2"/>
-        <Label tap="tapCell6" text="2, 0" row="2" col="0" borderColor="black" borderWidth="2"/>
-        <Label tap="tapCell7" text="2, 1" row="2" col="1" borderColor="black" borderWidth="2"/>
-        <Label tap="tapCell8" text="2, 2" row="2" col="2" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell0" text="{{ board[0] }}" row="0" col="0" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell1" text="{{ board[1] }}" row="0" col="1" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell2" text="{{ board[2] }}" row="0" col="2" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell3" text="{{ board[3] }}" row="1" col="0" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell4" text="{{ board[4] }}" row="1" col="1" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell5" text="{{ board[5] }}" row="1" col="2" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell6" text="{{ board[6] }}" row="2" col="0" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell7" text="{{ board[7] }}" row="2" col="1" borderColor="black" borderWidth="2"/>
+        <Label tap="tapCell8" text="{{ board[8] }}" row="2" col="2" borderColor="black" borderWidth="2"/>
     </GridLayout>
     <StackLayout orientation="horizontal"  row="2">
         <Label text="Game State" textWrap="true" />
