@@ -5,12 +5,16 @@ function pageLoaded(args) {
     page.bindingContext = viewModel;
 }
 
+function btnJoinGameTapped(args) {
+  viewModel.navigateToJoinGame(args);
+}
+
 function btnCreateGameTapped(args) {
   viewModel.navigateToCreateGame(args);
 }
 
-function btnJoinGameTapped(args) {
-  viewModel.navigateToJoinGame(args);
+function btnProfileTapped(args) {
+  viewModel.navigateToProfile(args);
 }
 
 function btnLogoutTapped(args) {
@@ -21,5 +25,6 @@ module.exports = {
   pageLoaded,
   btnJoinGameTapped,
   btnCreateGameTapped,
-  btnLogoutTapped
+  btnLogoutTapped,
+  btnProfileTapped
 };
