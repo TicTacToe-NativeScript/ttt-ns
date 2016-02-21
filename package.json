@@ -6,7 +6,9 @@
     }
   },
   "dependencies": {
+  	"moment": "^2.11.2",
     "nativescript-effects": "^0.2.3",
+    "nativescript-sqlite": "~1.0.8",
     "tns-core-modules": "1.6.0"
   }
 }

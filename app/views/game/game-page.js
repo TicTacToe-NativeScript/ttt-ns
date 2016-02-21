@@ -7,10 +7,11 @@ function pageLoaded(args) {
     let page = args.object;
     page.bindingContext = viewModel;
     
-    // setInterval(countDown, 2000);
+    setInterval(countDown, 2000);
 }
 
 function pageNavigatedTo(args) {
+    
 }
 
 function disableBoard() {

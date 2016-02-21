@@ -43,7 +43,7 @@ class GameViewModel extends Observable {
         this.checkStatus();
     }
 
-    checkStatus() {
+    checkStatus(callback) {
         let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
         let that = this;
         data.getById(tempId) //this.gameId)
@@ -55,18 +55,17 @@ class GameViewModel extends Observable {
                     that.set("isPlayerOneTurn", result.IsPlayer1);
                 }
 
-                if (that.dbBoard.toString !== board.toString) {
+                if (that.dbBoard.join('') != board.join('')) {
                     that.dbBoard = board;
                     that.rebindBoard();
                 }
 
-                // return {
-                //     gameOver: result.GameIsOver,
-                //     hasPlayerTwo: result.Player2Id != null
-                // };
+                result = {
+                    gameOver: result.GameIsOver,
+                    hasPlayerTwo: result.Player2Id != null
+                };
                 
-                // send back to views and redraw
-                // check if win condition is met
+                callback(result);
             }, function (err) {
                 alert(JSON.stringify(err));
             });
@@ -82,7 +81,6 @@ class GameViewModel extends Observable {
         let markToPlace = this.isPlayerOneTurn ? 1 : 2;
         let that = this;
         let success = false;
-        let message = '';
         let result = {};
 
         if (this.dbBoard[pos] > 0) {
@@ -94,16 +92,11 @@ class GameViewModel extends Observable {
 
         this.dbBoard[pos] = markToPlace;
 
-        console.log("Before update");
-
         let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
         data.updateSingle({ Id: tempId, 'IsPlayer1': !that.isPlayerOneTurn, 'Board': that.dbBoard },
             function (data) {
-                console.log("Inside success");
                 that.rebindBoard();
                 that.set("isPlayerOneTurn", !that.isPlayerOneTurn);
-
-                console.log("inside placeMark before return");
                 
                 result.success = true;
                 
@@ -111,21 +104,16 @@ class GameViewModel extends Observable {
             },
             function (error) {
                 alert(JSON.stringify(error));
-                console.log("inside placeMark error handler");
+                
                 result.success = false;
+                result.message = error;
                 
                 callback(result)
             });
     }
-
-    placeRandomMark() {
-        //         let emptyIndexes = this.dbBoard.filter(function (val) {
-        //             return val == 0;
-        //         });
-        // 
-        //         let index = Math.floor(Math.random() * (8 - 0 + 1) + 0);
-        // 
-        //         return this.placeMark(index);
+    
+    checkIfGameOver() {
+        
     }
 }
 
