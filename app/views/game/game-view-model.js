@@ -20,7 +20,7 @@ class GameViewModel extends Observable {
         this.secondPlayer = {
             userName: 'Second Player'
         };
-        
+
         this.dbBoard = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         this.cell0 = '';
         this.cell1 = '';
@@ -30,17 +30,17 @@ class GameViewModel extends Observable {
         this.cell5 = '';
         this.cell6 = '';
         this.cell7 = '';
-        this.cell8 = '';    
-
-        this.rebindBoard();
+        this.cell8 = '';
 
         this.isPlayerOneTurn = true;
-        this.iAmPlayerOne = false;
+        this.iAmPlayerOne = true;
 
         this.gameId = "";
 
         el = new Everlive(globals.BS_API_KEY);
         data = el.data('Game');
+
+        this.checkStatus();
     }
 
     checkStatus() {
@@ -50,38 +50,41 @@ class GameViewModel extends Observable {
             .then(function (data) {
                 var result = data.result;
                 var board = result.Board;
-                that.dbBoard = board;
+
+                if (that.isPlayerOneTurn != result.isPlayer1) {
+                    that.set("isPlayerOneTurn", result.IsPlayer1);
+                }
+
+                if (that.dbBoard.toString !== board.toString) {
+                    that.dbBoard = board;
+                    that.rebindBoard();
+                }
+
+                // return {
+                //     gameOver: result.GameIsOver,
+                //     hasPlayerTwo: result.Player2Id != null
+                // };
                 
-                that.rebindBoard();
                 // send back to views and redraw
                 // check if win condition is met
             }, function (err) {
                 alert(JSON.stringify(err));
             });
-      
-        // Get IsPlayer1 from db
-        // -> set to property
-        // -> return
-      
-        return this.isPlayerOneTurn;
     }
 
     rebindBoard() {
-        console.log("Inside rebind");
         for (let i = 0; i < this.dbBoard.length; i++) {
             this.set("cell" + i, marks[this.dbBoard[i]]);
         }
     }
 
-    placeMark(pos) {
+    placeMark(pos, callback) {
         let markToPlace = this.isPlayerOneTurn ? 1 : 2;
         let that = this;
         let success = false;
         let message = '';
+        let result = {};
 
-        console.log("Placing at pos " + pos);
-        console.log(this.dbBoard);
-        
         if (this.dbBoard[pos] > 0) {
             return {
                 success: success,
@@ -89,42 +92,40 @@ class GameViewModel extends Observable {
             }
         }
 
-        // if ((this.iAmPlayerOne && !this.isPlayerOneTurn) || (!this.iAmPlayerOne && this.isPlayerOneTurn)) {
-        //     return {
-        //         success: success,
-        //         message: "It's not your turn!"
-        //     }
-        // }
-
         this.dbBoard[pos] = markToPlace;
 
-        this.set("isPlayerOneTurn", !this.isPlayerOneTurn);
-       
+        console.log("Before update");
+
         let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
-        data.updateSingle({ Id: tempId, 'Board': this.dbBoard, 'IsPlayer1': !this.isPlayerOneTurn },
+        data.updateSingle({ Id: tempId, 'IsPlayer1': !that.isPlayerOneTurn, 'Board': that.dbBoard },
             function (data) {
-                success = true;
-                
+                console.log("Inside success");
                 that.rebindBoard();
+                that.set("isPlayerOneTurn", !that.isPlayerOneTurn);
+
+                console.log("inside placeMark before return");
                 
-                return {
-                    success: success,
-                    mark: !that.isPlayerOneTurn ? 'X' : 'O',
-                    message: message
-                }
+                result.success = true;
+                
+                callback(result);
             },
             function (error) {
                 alert(JSON.stringify(error));
-                console.log(error);
-                return {
-                    success: success,
-                    message: error
-                };
+                console.log("inside placeMark error handler");
+                result.success = false;
+                
+                callback(result)
             });
     }
 
     placeRandomMark() {
-        // Place marker if player doesnt play their turn within 30 secs 
+        //         let emptyIndexes = this.dbBoard.filter(function (val) {
+        //             return val == 0;
+        //         });
+        // 
+        //         let index = Math.floor(Math.random() * (8 - 0 + 1) + 0);
+        // 
+        //         return this.placeMark(index);
     }
 }
 
