@@ -1,4 +1,5 @@
 'use strict';
+
 let viewModel = require('./game-view-model').gameViewModel;
 let Label = require('ui/label').Label;
 
@@ -21,12 +22,6 @@ function removeCellEvent() {
 function tapCell0(args) {
     let result = viewModel.placeMark(0);
 
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
-    
     // get result
     // if move was valid ->
     // won?
@@ -34,97 +29,47 @@ function tapCell0(args) {
     // switch active player's turn
     // if not current player's turn -> disableBoard?
     // start ticking down timer
-    // redrawBoard
     // remove event listener of this element
 }
 
 function tapCell1(args) {
     let result = viewModel.placeMark(1);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
+    args.view 
 }
 
 function tapCell2(args) {
     let result = viewModel.placeMark(2);
 
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
 }
 
 function tapCell3(args) {
     let result = viewModel.placeMark(3);
 
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
 }
 
 function tapCell4(args) {
     let result = viewModel.placeMark(4);
 
-    if (result.success) {
-        setCell(result, args);
-    } else {
-        
-    }
 }
 
 function tapCell5(args) {
     let result = viewModel.placeMark(5);
 
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
 }
 
 function tapCell6(args) {
     let result = viewModel.placeMark(6);
 
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
 }
 
 function tapCell7(args) {
     let result = viewModel.placeMark(7);
 
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
 }
 
 function tapCell8(args) {
     let result = viewModel.placeMark(8);
 
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
-}
-
-function setCell(result, viewArgs) {
-    let newLabel = new Label();
-    newLabel.className = "game-mark";
-    newLabel.text = result.mark;
-    viewArgs.view.addChild(newLabel);
-
-    viewArgs.view.off("tap");
 }
 
 module.exports = {
