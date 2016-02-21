@@ -2,9 +2,7 @@
 
 let Observable = require("data/observable").Observable;
 let frame = require('ui/frame');
-let applicationSettings = require('application-settings');
-let globals = require('../../common/globals');
-let Everlive = require('../../lib/everlive.all.min.js');
+let userService = require('../../services/user-service').defaultInstance;
 let dialogs = require('ui/dialogs');
 
 class HomeViewModel extends Observable {
@@ -23,11 +21,8 @@ class HomeViewModel extends Observable {
   }
 
   logout(args) {
-    let el = new Everlive(globals.BS_API_KEY);
-    el.authentication.clearAuthorization();
-    applicationSettings.remove(globals.TOKEN_DATA_KEY);
-    applicationSettings.remove(globals.USER_ID);
-
+    userService.logout();
+    
     dialogs.alert({
       title: 'Success',
       message: 'Logout successful!',

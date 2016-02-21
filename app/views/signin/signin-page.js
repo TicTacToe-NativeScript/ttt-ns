@@ -22,8 +22,6 @@ function btnLoginTap(args) {
         });
       });
     }, function (err) {
-      console.log('-------Error');
-      console.dir(err);
       dialogs.alert({
         title: 'Error',
         message: err.message
