@@ -1,130 +1,95 @@
 'use strict';
+
 let viewModel = require('./game-view-model').gameViewModel;
 let Label = require('ui/label').Label;
 
 function pageLoaded(args) {
     let page = args.object;
     page.bindingContext = viewModel;
+    
+    setInterval(countDown, 2000);
 }
 
 function pageNavigatedTo(args) {
+    
 }
 
 function disableBoard() {
 
 }
 
-function removeCellEvent() {
+function removeCellEvent(args) {
+    args.view.off('tap');
+}
+
+function handleResult(result, view) {
+    if (result && result.success) {
+            removeCellEvent(view);
+        } else if (result && result.message) {
+            alert(result.message);
+        } else {
+            console.log("FATAL ERROR ");
+        }
+}
+
+function tapCell0(viewArgs) {
+    viewModel.placeMark(0, function(result) {
+        handleResult(result, viewArgs);
+    });
+}
+
+function tapCell1(viewArgs) {
+    viewModel.placeMark(1, function(result) {
+        handleResult(result, viewArgs);
+    });
+}
+
+function tapCell2(viewArgs) {
+    viewModel.placeMark(2, function(result) {
+        handleResult(result, viewArgs);
+    });
+}
+
+function tapCell3(viewArgs) {
+    viewModel.placeMark(3, function(result) {
+        handleResult(result, viewArgs);
+    });
+}
+
+function tapCell4(viewArgs) {
+    viewModel.placeMark(4, function(result) {
+        handleResult(result, viewArgs);
+    });;
 
 }
 
-function tapCell0(args) {
-    let result = viewModel.placeMark(0);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
-    
-    // get result
-    // if move was valid ->
-    // won?
-    // dialog -> redirect to home (without back functionality)
-    // switch active player's turn
-    // if not current player's turn -> disableBoard?
-    // start ticking down timer
-    // redrawBoard
-    // remove event listener of this element
+function tapCell5(viewArgs) {
+    viewModel.placeMark(5, function(result) {
+        handleResult(result, viewArgs);
+    });
 }
 
-function tapCell1(args) {
-    let result = viewModel.placeMark(1);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
+function tapCell6(viewArgs) {
+    viewModel.placeMark(6, function(result) {
+        handleResult(result, viewArgs);
+    });
 }
 
-function tapCell2(args) {
-    let result = viewModel.placeMark(2);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
+function tapCell7(viewArgs) {
+    viewModel.placeMark(7, function(result) {
+        handleResult(result, viewArgs);
+    });
 }
 
-function tapCell3(args) {
-    let result = viewModel.placeMark(3);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
+function tapCell8(viewArgs) {
+    viewModel.placeMark(8, function(result) {
+        handleResult(result, viewArgs);
+    });
 }
 
-function tapCell4(args) {
-    let result = viewModel.placeMark(4);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-        
-    }
-}
-
-function tapCell5(args) {
-    let result = viewModel.placeMark(5);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
-}
-
-function tapCell6(args) {
-    let result = viewModel.placeMark(6);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
-}
-
-function tapCell7(args) {
-    let result = viewModel.placeMark(7);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
-}
-
-function tapCell8(args) {
-    let result = viewModel.placeMark(8);
-
-    if (result.success) {
-        setCell(result, args);
-    } else {
-
-    }
-}
-
-function setCell(result, viewArgs) {
-    let newLabel = new Label();
-    newLabel.className = "game-mark";
-    newLabel.text = result.mark;
-    viewArgs.view.addChild(newLabel);
-
-    viewArgs.view.off("tap");
+function countDown() {
+    viewModel.checkStatus();
+    console.log("Ping");
 }
 
 module.exports = {
