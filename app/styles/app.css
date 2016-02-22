@@ -29,3 +29,7 @@ label {
   font-size: 28;
   text-align: center;
 }
+
+.btn-create-game {
+  margin-top: 50;
+}

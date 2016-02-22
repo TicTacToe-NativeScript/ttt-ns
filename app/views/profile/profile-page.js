@@ -14,6 +14,7 @@ let gridId = 'result-grid';
 
 function pageLoaded(args) {
   var page = args.object;
+  let label = new Label();
   page.bindingContext = viewModel;
 
   let container = page.getViewById('slResultContainer');

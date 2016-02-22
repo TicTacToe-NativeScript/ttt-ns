@@ -18,8 +18,7 @@ function btnLoginTap(args) {
       }).then(function () {
         frame.topmost()
           .navigate({
-            moduleName: './views/home/home-page',
-            clearHistory: true
+            moduleName: './views/home/home-page'
           });
       });
     }, function (err) {

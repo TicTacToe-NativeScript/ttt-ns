@@ -40,8 +40,7 @@ class HomeViewModel extends Observable {
         }).then(function () {
           frame.topmost()
             .navigate({
-              moduleName: './views/start/start-page',
-              clearHistory: true
+              moduleName: './views/start/start-page'
             });
         });
       });

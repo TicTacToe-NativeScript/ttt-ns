@@ -5,7 +5,7 @@
           <Switch checked="{{ isPrivate }}" />
       </StackLayout>
       <TextField hint="Password" secure="true" visibility="{{ isPrivate ? 'visible' : 'collapsed' }}" text="{{ password }}" />
-      <Button text="Create Game" tap="btnCreateGameTapped" />
+      <Button class="btn-create-game" text="Create Game" tap="btnCreateGameTapped" />
       
   </StackLayout>
 </Page>

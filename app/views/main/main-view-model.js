@@ -18,8 +18,7 @@ class MainViewModel extends Observable {
       .navigate({
         moduleName: './views/signin/signin-page',
         animated: true,
-        transition: "flip",
-        clearHistory: true
+        transition: "flip"
       });
   }
 }
