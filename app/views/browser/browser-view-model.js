@@ -92,5 +92,6 @@ function addGames(start, count) {
 }
 
 module.exports = {
+  BrowserViewModel: BrowserViewModel,
   browserViewModel: new BrowserViewModel()
 };
