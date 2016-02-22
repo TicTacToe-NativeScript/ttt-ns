@@ -48,7 +48,7 @@ class GamesService extends BaseService {
         this.everlive.data('Game').get(query)
             .then(function (data) {
                 console.log('-----All games');
-                console.dir(data);
+                // console.dir(data);
             }, function (err) {
                 console.log('-----Error');
                 console.dir(err);

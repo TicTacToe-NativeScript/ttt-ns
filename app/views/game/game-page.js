@@ -4,6 +4,8 @@ let viewModel = require('./game-view-model').gameViewModel;
 let Label = require('ui/label').Label;
 let dialogs = require('ui/dialogs');
 let frame = require('ui/frame');
+let gamesService = require('../../services/games-service').defaultInstance;
+let userService = require('../../services/user-service').defaultInstance;
 
 let interval = null;
 
@@ -26,7 +28,12 @@ function pageNavigatedTo(args) {
         viewModel.iAmPlayerOne = false;
         viewModel.secondPlayer.userName = 'Me';
         
-        viewModel.setSecondPlayer()
+        userService.getCurrentUser()
+            .then(function(res) {
+                
+            }, function(err) {
+                
+            });
     }
     
     interval = setInterval(ping, 2000);
