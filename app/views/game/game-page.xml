@@ -1,41 +1,41 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo" navigatingFrom="pageNavigatingFrom">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo" navigatedFrom="pageNavigatedFrom">
   <GridLayout rows="1*, 5*, 1*">
     <StackLayout orientation="horizontal" row="0">
-        <Label text="{{ iAmPlayerOne && isPlayerOneTurn ? 'It is your turn, ' : '' }}" textWrap="true" />
+        <Label text="{{ iAmPlayerOne && isPlayerOneTurn ? 'It is your turn ' : ' ' }}" textWrap="true" cssClass="title" />
     <StackLayout orientation="horizontal" cssClass="horizontal-line"/>
-        <Label text="{{ iAmPlayerOne && !isPlayerOneTurn ? '' : 'It\'s your turn, '}}" textWrap="true" />
+        <Label text="{{ !iAmPlayerOne && !isPlayerOneTurn ? 'It is your turn ' : ' '}}" textWrap="true" cssClass="title" />
     </StackLayout>
     <GridLayout rows="*, *, *" columns="*, *, *" borderColor="black" borderWidth="2" row="1">
         <StackLayout tap="tapCell0" row="0" col="0" borderColor="black" borderWidth="2">
-            <Label text="{{ cell0 }}"  textWrap="true" />
+            <Label text="{{ cell0 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
         <StackLayout tap="tapCell1" row="0" col="1" borderColor="black" borderWidth="2">
-            <Label text="{{ cell1 }}"  textWrap="true" />
+            <Label text="{{ cell1 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
         <StackLayout tap="tapCell2" row="0" col="2" borderColor="black" borderWidth="2">
-            <Label text="{{ cell2 }}"  textWrap="true" />
+            <Label text="{{ cell2 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
         <StackLayout tap="tapCell3" row="1" col="0" borderColor="black" borderWidth="2">
-            <Label text="{{ cell3 }}"  textWrap="true" />
+            <Label text="{{ cell3 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
         <StackLayout tap="tapCell4" row="1" col="1" borderColor="black" borderWidth="2">
-            <Label text="{{ cell4 }}"  textWrap="true" />
+            <Label text="{{ cell4 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
         <StackLayout tap="tapCell5" row="1" col="2" borderColor="black" borderWidth="2">
-            <Label text="{{ cell5 }}"  textWrap="true" />
+            <Label text="{{ cell5 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
         <StackLayout tap="tapCell6" row="2" col="0" borderColor="black" borderWidth="2">
-            <Label text="{{ cell6 }}"  textWrap="true" />
+            <Label text="{{ cell6 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
         <StackLayout tap="tapCell7" row="2" col="1" borderColor="black" borderWidth="2">
-            <Label text="{{ cell7 }}"  textWrap="true" />
+            <Label text="{{ cell7 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
         <StackLayout tap="tapCell8" row="2" col="2" borderColor="black" borderWidth="2">
-            <Label text="{{ cell8 }}"  textWrap="true" />
+            <Label text="{{ cell8 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
     </GridLayout>
     <StackLayout row="2">
-        <Label text="{{ isPlayerOneTurn ? firstPlayer : secondPlayer + '\'s turn'}}" textWrap="true" />
+        <Label text="{{ isPlayerOneTurn ? firstPlayer + '\'s turn' : secondPlayer + '\'s turn'}}" textWrap="true" cssClass="title" />
     </StackLayout>
   </GridLayout>
 </Page>

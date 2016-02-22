@@ -19,15 +19,15 @@ function pageNavigatedTo(args) {
     viewModel.gameId = game.Id;
 
     if (game.createdByMe) {
+        console.dir(game);
         viewModel.set("iAmPlayerOne", true);
-        viewModel.set('firstPlayer', game.Player1Id.DisplayName);
+        viewModel.set('firstPlayer', game.Player1Name);
     } else {
         userService.getCurrentUser()
             .then(function (res) {
                 gamesService.setPlayer2ToGame(res.userId, res.username, game.Id)
                     .then(function (res) {
                         viewModel.set("iAmPlayerOne", false);
-                        viewModel.set('secondPlayer', res.username);
                     }, function (err) {
                         console.log("error in setting 2nd player to game");
                         console.log(err);
@@ -41,7 +41,7 @@ function pageNavigatedTo(args) {
     interval = setInterval(ping, 2000);
 }
 
-function pageNavigatingFrom(args) {
+function pageNavigatedFrom(args) {
     console.dir(args);
     console.log("At navigating from");
     clearInterval(interval);
@@ -119,6 +119,7 @@ function tapCell8(viewArgs) {
 function ping() {
     viewModel.checkStatus(function (result) {
         if (result.hasSecondPlayer) {
+            console.log("Player joined!");
             alert("A player joined!");
         }
     }, function (endResult) {
