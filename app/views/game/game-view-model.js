@@ -52,9 +52,7 @@ class GameViewModel extends Observable {
                 var result = data.result;
                 var board = result.Board;
 
-                if (that.isPlayerOneTurn != result.isPlayer1) {
-                    that.set("isPlayerOneTurn", result.IsPlayer1);
-                }
+                that.set("isPlayerOneTurn", result.IsPlayer1);
 
                 if (that.dbBoard.join('') != board.join('')) {
                     that.dbBoard = board;
@@ -65,7 +63,7 @@ class GameViewModel extends Observable {
                     if (result.Player2Id) {
                         that.set("hasSecondPlayer", true);
                         that.set("secondPlayer", result.Player2Name);
-                        that.set("firstPlayer", result.Player2Name);
+                        that.set("firstPlayer", result.Player1Name);
                     }
                 }
 
