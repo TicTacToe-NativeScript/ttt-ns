@@ -15,11 +15,12 @@ function btnLoginTap(args) {
         title: 'Success!',
         message: 'Login successfull!',
         okButtonText: 'Ok'
-      }).then(function() {
-      frame.topmost()
-        .navigate({
-          moduleName: './views/home/home-page'
-        });
+      }).then(function () {
+        frame.topmost()
+          .navigate({
+            moduleName: './views/home/home-page',
+            clearHistory: true
+          });
       });
     }, function (err) {
       dialogs.alert({

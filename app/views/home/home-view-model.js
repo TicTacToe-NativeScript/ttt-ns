@@ -24,7 +24,7 @@ class HomeViewModel extends Observable {
     frame.topmost()
       .navigate('./views/profile/profile-page');
   }
-  
+
   navigateToHighscore(args) {
     frame.topmost()
       .navigate('./views/highscore/highscore-page');
@@ -40,7 +40,8 @@ class HomeViewModel extends Observable {
         }).then(function () {
           frame.topmost()
             .navigate({
-              moduleName: './views/start/start-page'
+              moduleName: './views/start/start-page',
+              clearHistory: true
             });
         });
       });

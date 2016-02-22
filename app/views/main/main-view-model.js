@@ -7,21 +7,21 @@ class MainViewModel extends Observable {
   constructor() {
     super();
   }
-  
+
   navigateToSignUp(args) {
     frame.topmost()
       .navigate('./views/signup/signup-page');
   }
-    
-   navigateToSignIn(args) {
-        frame.topmost()
-            .navigate({
-              moduleName: './views/signin/signin-page',
-              animated: true,
-              transition: "flip",
-              backstackVisible: false
-            });
-    }
+
+  navigateToSignIn(args) {
+    frame.topmost()
+      .navigate({
+        moduleName: './views/signin/signin-page',
+        animated: true,
+        transition: "flip",
+        clearHistory: true
+      });
+  }
 }
 
 module.exports = {
