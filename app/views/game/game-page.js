@@ -28,6 +28,7 @@ function pageNavigatedTo(args) {
                 gamesService.setPlayer2ToGame(res.userId, res.username, game.Id)
                     .then(function (res) {
                         viewModel.set("iAmPlayerOne", false);
+                        ping();
                     }, function (err) {
                         console.log("error in setting 2nd player to game");
                         console.log(err);
@@ -54,6 +55,7 @@ function handleResult(result, view) {
     if (result && result.success) {
         removeCellEvent(view);
     } else if (result && result.message) {
+        console.log("At alternate result");
         alert(result.message);
     } else {
         console.log("FATAL ERROR ");

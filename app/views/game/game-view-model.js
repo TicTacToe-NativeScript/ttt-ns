@@ -7,6 +7,11 @@ let Everlive = require('../../lib/everlive.all.min.js');
 let applicationSettings = require('application-settings');
 let el = null;
 let data = null;
+let sound = require("nativescript-sound");
+
+let winSound = sound.create('~/resources/sounds/win.wav');
+let lossSound = sound.create('~/resources/sounds/loss.wav');
+let bopSound = sound.create('~/resources/sounds/playturn.wav');
 
 let marks = [' ', 'X', 'O'];
 
@@ -60,10 +65,13 @@ class GameViewModel extends Observable {
                 }
 
                 if (!that.hasSecondPlayer) {
+                    console.log('No second player yet...');
                     if (result.Player2Id) {
                         that.set("hasSecondPlayer", true);
                         that.set("secondPlayer", result.Player2Name);
                         that.set("firstPlayer", result.Player1Name);
+                        
+                        outResult.hasSecondPlayer = true;
                     }
                 }
 
@@ -80,15 +88,21 @@ class GameViewModel extends Observable {
                             console.log("Inside player 1 won");
                             resultToReturn.message = that.iAmPlayerOne ? winningText : losingText;
                             that.p1Won(resultToReturn.message, endGameCallback);
+
+                            that.iAmPlayerOne ? winSound.play() : lossSound.play();
                             break;
                         case 2:
                             console.log("Inside player 2 won");
                             resultToReturn.message = that.iAmPlayerOne ? losingText : winningText;
                             that.p2Won(resultToReturn.message, endGameCallback);
+
+                            that.iAmPlayerOne ? lossSound.play() : winSound.play();
                             break;
                         case 0:
                             console.log("Inside no player won - tie");
                             that.tie(tieText, endGameCallback);
+
+                            lossSound.play();
                             break;
                     }
                 } else {
@@ -153,19 +167,11 @@ class GameViewModel extends Observable {
 
         if (!this.hasSecondPlayer) {
             return {
+                success: false,
                 message: 'Wait for a player to join!'
             };
         }
 
-        console.log(that.firstPlayer + ' vs ' + that.secondPlayer);
-        
-        // if ((this.iAmPlayerOne && !this.isPlayerOneTurn) || (!this.iAmPlayerOne && this.isPlayerOneTurn)) {
-        //     return {
-        //         success: false,
-        //         message: "It's not your turn!"
-        //     }
-        // }
-        
         if ((!this.iAmPlayerOne && this.isPlayerOneTurn) || (this.iAmPlayerOne && !this.isPlayerOneTurn)) {
             return {
                 success: false,
@@ -174,6 +180,8 @@ class GameViewModel extends Observable {
         }
 
         this.dbBoard[pos] = markToPlace;
+        bopSound.play();
+        //winSound.play();
 
         let tempId = this.gameId;
         data.updateSingle({ Id: tempId, 'IsPlayer1': !that.isPlayerOneTurn, 'Board': that.dbBoard },

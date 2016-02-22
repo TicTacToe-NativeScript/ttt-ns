@@ -35,6 +35,7 @@
         </StackLayout>
     </GridLayout>
     <StackLayout row="2">
+        <Label text="{{ firstPlayer + ' vs ' + secondPlayer}}" textWrap="true" cssClass="title" />
     </StackLayout>
   </GridLayout>
 </Page>

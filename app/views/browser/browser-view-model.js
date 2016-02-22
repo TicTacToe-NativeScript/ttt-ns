@@ -83,8 +83,7 @@ function navigate(selectedGame) {
   let navigationEntry = {
     moduleName: "./views/game/game-page",
     context: selectedGame,
-    animated: true,
-    clearHistory: true
+    animated: true
   };
 
   frame.topmost()
