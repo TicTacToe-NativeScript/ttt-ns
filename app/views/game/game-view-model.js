@@ -62,6 +62,7 @@ class GameViewModel extends Observable {
                 if(!that.hasSecondPlayer) {
                     if(result.Player2Id) {
                         that.set("hasSecondPlayer", true);
+                        that.set("secondPlayer", result.Player2Name);
                         outResult.hasSecondPlayer = true; 
                     }
                 }
@@ -150,9 +151,11 @@ class GameViewModel extends Observable {
             }
         }
         
+        console.log(that.firstPlayer + ' vs ' + that.secondPlayer);
+        
         // if ((this.iAmPlayerOne && !this.isPlayerOneTurn) || (!this.iAmPlayerOne && this.isPlayerOneTurn)) {
         //     return {
-        //         success: success,
+        //         success: false,
         //         message: "It's not your turn!"
         //     }
         // }
