@@ -18,7 +18,6 @@ class HighscoreViewModel extends Observable {
     userService.getTopUsers(10)
       .then(function (users) {
         users.forEach(function (item, index) {
-          console.log(index);
           if (index === 0) {
             item.trophy = '~/resources/images/gold-trophy.png';
           }
@@ -28,9 +27,7 @@ class HighscoreViewModel extends Observable {
           else if (index === 2) {
             item.trophy = '~/resources/images/bronze-trophy.png';
           }
-          
-          console.dir(item);
-          
+                    
           that.topUsers.push(item);
         });
       }, function (err) {
