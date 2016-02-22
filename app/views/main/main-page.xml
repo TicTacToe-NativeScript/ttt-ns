@@ -1,5 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-  <StackLayout>
+  <StackLayout verticalAlignment="center">
     <Button text="Sign Up" tap="btnSignUpTapped" />
     <GridLayout rows="auto *" verticalAlignment="bottom" row="5">
             <Label text="Already a member?" cssClass="label" />
