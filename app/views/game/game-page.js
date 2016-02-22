@@ -144,6 +144,7 @@ function ping() {
 module.exports = {
     pageLoaded,
     pageNavigatedTo,
+    pageNavigatedFrom,
     tapCell0,
     tapCell1,
     tapCell2,

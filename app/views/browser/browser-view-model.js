@@ -84,7 +84,7 @@ function navigate(selectedGame) {
     moduleName: "./views/game/game-page",
     context: selectedGame,
     animated: true,
-    backstackVisible: false
+    clearHistory: true
   };
 
   frame.topmost()

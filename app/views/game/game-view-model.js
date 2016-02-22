@@ -151,6 +151,12 @@ class GameViewModel extends Observable {
             }
         }
         
+        if(!this.hasSecondPlayer) {
+            return {
+                message: 'Wait for a player to join!'
+            };
+        }
+        
         console.log(that.firstPlayer + ' vs ' + that.secondPlayer);
         
         // if ((this.iAmPlayerOne && !this.isPlayerOneTurn) || (!this.iAmPlayerOne && this.isPlayerOneTurn)) {
