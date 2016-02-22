@@ -8,6 +8,8 @@ class BaseService {
       appId: globals.BS_API_KEY,
       scheme: scheme || 'http'
     });
+    
+    this.el = Everlive;
   }
 }
 
