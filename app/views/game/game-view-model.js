@@ -7,7 +7,8 @@ let Everlive = require('../../lib/everlive.all.min.js');
 let applicationSettings = require('application-settings');
 let el = null;
 let data = null;
-let sound = require("nativescript-sound");
+let sound = require('nativescript-sound');
+var sqliteDb = require('../../database/sqlite-db-handler').defaultInstance;
 
 let winSound = sound.create('~/resources/sounds/win.wav');
 let lossSound = sound.create('~/resources/sounds/loss.wav');
@@ -105,6 +106,16 @@ class GameViewModel extends Observable {
                             lossSound.play();
                             break;
                     }
+                    
+                    sqliteDb.addGameResult({
+                        playerOneId: result.Player1Id,
+                        playerOneUsername: result.Player1Name,
+                        playerTwoId: result.Player2Id,
+                        playerTwoUsername: result.Player2Name,
+                        board: result.Board,
+                        playedOn: result.CreatedAt
+                    });
+                    
                 } else {
                     playCallback(outResult);
                 }
