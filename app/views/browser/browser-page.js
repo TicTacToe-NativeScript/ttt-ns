@@ -1,11 +1,16 @@
 'use strict';
 let nativescriptEffects = require('nativescript-effects');
-let viewModel = require('./browser-view-model').browserViewModel;
+let BrowserViewModel = require('./browser-view-model').BrowserViewModel;
 let applicationSettings = require('application-settings');
+let viewModel;
 
 function pageLoaded(args) {
   let page = args.object;
   page.bindingContext = viewModel;
+}
+
+function pageNavigatedTo(args) {
+  viewModel = new BrowserViewModel();
 }
 
 function onItemLoading(args) {
@@ -17,5 +22,6 @@ function onItemLoading(args) {
 
 module.exports = {
   pageLoaded,
-  onItemLoading
+  onItemLoading,
+  pageNavigatedTo
 };

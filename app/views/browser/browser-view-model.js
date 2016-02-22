@@ -20,6 +20,7 @@ class BrowserViewModel extends Observable {
     let that = this;
     gamesService.getGamesWaitingForPlayerForPage(this.page)
       .then(function (availableGames) {
+        console.dir(availableGames);
         availableGames.forEach(game => {
           that.games.push(game);
         });
@@ -71,5 +72,6 @@ function navigate(selectedGame) {
 
 
 module.exports = {
+  BrowserViewModel: BrowserViewModel,
   browserViewModel: new BrowserViewModel()
 };
