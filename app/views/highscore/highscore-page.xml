@@ -1,0 +1,18 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo">
+  <StackLayout>
+    <Label class="title" text="Highscore" textWrap="true" /><ListView items="{{topUsers}}">
+      <ListView.itemTemplate>
+        <StackLayout style="padding: 10;" orientation="horizontal">
+            <Label class="label-user" text="{{ DisplayName }}" textWrap="true" />
+            <StackLayout orientation="horizontal">
+                <Image src="~/resources/images/crown.png" stretch ="none" />
+                <Label class="label-user" text="{{ GamesWon }}" textWrap="true" />
+                <Image src="~/resources/images/skull.png" stretch ="none" />
+                <Label class="label-user" text="{{ GamesLost }}" textWrap="true" />
+                <Image src="{{ trophy }}" visibility="{{ trophy ? 'visible' : 'collapsed' }}" stretch ="none" />
+            </StackLayout>
+        </StackLayout>
+      </ListView.itemTemplate>
+    </ListView>
+  </StackLayout>
+</Page>

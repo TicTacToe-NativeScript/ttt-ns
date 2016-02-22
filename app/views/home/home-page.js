@@ -1,8 +1,8 @@
 var viewModel = require("./home-view-model").homeViewModel;
 
 function pageLoaded(args) {
-    var page = args.object;
-    page.bindingContext = viewModel;
+  var page = args.object;
+  page.bindingContext = viewModel;
 }
 
 function btnJoinGameTapped(args) {
@@ -17,6 +17,10 @@ function btnProfileTapped(args) {
   viewModel.navigateToProfile(args);
 }
 
+function btnHighscoreTapped(args) {
+  viewModel.navigateToHighscore(args);
+}
+
 function btnLogoutTapped(args) {
   viewModel.logout(args);
 }
@@ -26,5 +30,6 @@ module.exports = {
   btnJoinGameTapped,
   btnCreateGameTapped,
   btnLogoutTapped,
-  btnProfileTapped
+  btnProfileTapped,
+  btnHighscoreTapped
 };

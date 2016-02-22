@@ -122,6 +122,25 @@ class UserService extends BaseService {
 
     return promise;
   }
+  
+  getTopUsers(count) {
+    let query = new this.el.Query()
+            .order({
+                'GamesWon': -1,
+                'GamesLost': 1
+            })
+            .take(count);
+    
+    let that = this;
+    let promise = new Promise(function (resolve, reject) {
+      that.everlive.Users.get(query)
+        .then(function (data) {
+          resolve(data.result);
+        }, reject);
+    });
+    
+    return promise;
+  }
 }
 
 module.exports = {

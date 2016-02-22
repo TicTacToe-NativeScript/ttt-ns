@@ -4,6 +4,7 @@
     <Button text="Join game" tap="btnJoinGameTapped" />
     <Button text="Create new game" tap="btnCreateGameTapped" />  
     <Button text="Profile" tap="btnProfileTapped" />      
+    <Button text="Highscore" tap="btnHighscoreTapped" />    
     <Button text="Logout" tap="btnLogoutTapped" />    
   </StackLayout>
 </Page>

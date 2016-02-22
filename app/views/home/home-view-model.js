@@ -24,6 +24,11 @@ class HomeViewModel extends Observable {
     frame.topmost()
       .navigate('./views/profile/profile-page');
   }
+  
+  navigateToHighscore(args) {
+    frame.topmost()
+      .navigate('./views/highscore/highscore-page');
+  }
 
   logout(args) {
     userService.logout()
