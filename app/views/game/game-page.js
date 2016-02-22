@@ -16,9 +16,8 @@ function pageLoaded(args) {
 
 function pageNavigatedTo(args) {
     var game = args.context;
-    console.log("At pageNavigatedTo in Game Page CB")
-    console.dir(game);
-
+    console.log("At pageNavigatedTo in Game Page CB");
+    
     viewModel.gameId = game.Id;
 
     if (game.createdByMe) {
@@ -42,10 +41,6 @@ function pageNavigatedTo(args) {
     }
 
     interval = setInterval(ping, 2000);
-}
-
-function disableBoard() {
-
 }
 
 function removeCellEvent(args) {

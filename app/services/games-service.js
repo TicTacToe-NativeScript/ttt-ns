@@ -91,7 +91,7 @@ class GamesService extends BaseService {
                 .then(function (currentUser) {
                     let games = that.everlive.data('Game');
 
-                    games.updateSingle({ Id: gameId, 'Player2Id': currentUser, 'Player2Name': playerTwoName},
+                    games.updateSingle({ Id: gameId, 'Player2Id': playerTwoId, 'Player2Name': playerTwoName},
                         function(res) {
                             resolve();
                         }, reject);

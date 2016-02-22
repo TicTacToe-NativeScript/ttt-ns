@@ -59,6 +59,8 @@ class GameViewModel extends Observable {
                     that.dbBoard = board;
                     that.rebindBoard();
                 }
+                
+                console.log(result);
 
                 if (!that.canMakeAnyMoves() || that.checkIfGameOver(1) == 1 || that.checkIfGameOver(2) == 2) {
                     console.log("Inside end game condition");
@@ -144,7 +146,14 @@ class GameViewModel extends Observable {
                 message: 'You cannot make this move!'
             }
         }
-
+        
+        if ((this.iAmPlayerOne && !this.isPlayerOneTurn) || (!this.iAmPlayerOne && this.isPlayerOneTurn)) {
+            return {
+                success: success,
+                message: "It's not your turn!"
+            }
+        }
+        
         this.dbBoard[pos] = markToPlace;
 
         let tempId = this.gameId;
