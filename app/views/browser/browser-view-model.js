@@ -9,7 +9,7 @@ let gamesService = require('../../services/games-service').defaultInstance;
 class BrowserViewModel extends Observable {
   constructor() {
     super();
-    
+
     this.games = new ObservableArray([]);
     this.page = 0;
     this.loadMoreItems();
@@ -20,7 +20,6 @@ class BrowserViewModel extends Observable {
     let that = this;
     gamesService.getGamesWaitingForPlayerForPage(this.page)
       .then(function (availableGames) {
-        // console.dir(availableGames);
         availableGames.forEach(game => {
           that.games.push(game);
         });
@@ -32,29 +31,47 @@ class BrowserViewModel extends Observable {
 
   navigateToGamePage(args) {
     let selectedGame = this.games.getItem(args.index);
-    if (!selectedGame.IsPublic) {
-      dialogs.prompt({
-        title: 'Password for private game',
-        message: 'Enter the password:',
-        okButtonText: 'Ok'
-      })
-        .then(function (result) {
-          let password = result.text;
-
-          if (selectedGame.Passkey === password) {
-            navigate(selectedGame);
-          }
-          else {
-            dialogs.alert({
-              title: 'Incorrect pass',
-              message: 'The password is incorrect.'
+    gamesService.getById(selectedGame.Id)
+      .then(function (dbGame) {
+        if (dbGame.Player2Id !== null) {
+          dialogs.alert({
+            title: 'Cannot join this game',
+            message: 'This game has second player.',
+            okButtonText: 'Ok'
+          })
+            .then(function () {
+              args.page.onPageLoad(args.page);
             });
-          }
-        });
-    }
-    else {
-      navigate(selectedGame);
-    }
+          return;
+        }
+
+        if (!dbGame.IsPublic) {
+          dialogs.prompt({
+            title: 'Password for private game',
+            message: 'Enter the password:',
+            okButtonText: 'Ok'
+          })
+            .then(function (result) {
+              let password = result.text;
+
+              if (dbGame.Passkey === password) {
+                navigate(dbGame);
+              }
+              else {
+                dialogs.alert({
+                  title: 'Incorrect pass',
+                  message: 'The password is incorrect.'
+                });
+              }
+            });
+        }
+        else {
+          navigate(dbGame);
+        }
+      }, function (err) {
+        console.log('-------Error while getting the selected game info.');
+        console.dir(err);
+      });
   }
 }
 
