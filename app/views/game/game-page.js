@@ -25,17 +25,22 @@ function pageNavigatedTo(args) {
         viewModel.iAmPlayerOne = true;
         viewModel.firstPlayer.userName = game.Player1Id.DisplayName;
     } else {
-        viewModel.iAmPlayerOne = false;
-        viewModel.secondPlayer.userName = 'Me';
-        
         userService.getCurrentUser()
-            .then(function(res) {
-                
-            }, function(err) {
-                
+            .then(function (res) {
+                gamesService.setPlayer2ToGame(res.userId, res.username, game.Id)
+                    .then(function (res) {
+                        viewModel.iAmPlayerOne = false;
+                        viewModel.secondPlayer.userName = res.username;
+                    }, function (err) {
+                        console.log("error in setting 2nd player to game");
+                        console.log(err);
+                    })
+            }, function (err) {
+                console.log(err);
+                alert(JSON.stringify(err));
             });
     }
-    
+
     interval = setInterval(ping, 2000);
 }
 

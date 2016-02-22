@@ -185,7 +185,13 @@ class GameViewModel extends Observable {
                 && this.dbBoard[2] == player) ||
             (this.dbBoard[2] == player
                 && this.dbBoard[5] == player
-                && this.dbBoard[8] == player)) {
+                && this.dbBoard[8] == player) ||
+            (this.dbBoard[1] == player
+                && this.dbBoard[4] == player
+                && this.dbBoard[7] == player) ||
+            (this.dbBoard[3] == player
+                && this.dbBoard[4] == player
+                && this.dbBoard[5] == player)) {
             return player;
         } else {
             return 0;
