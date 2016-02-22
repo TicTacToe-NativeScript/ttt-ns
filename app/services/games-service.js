@@ -100,6 +100,18 @@ class GamesService extends BaseService {
         
         return promise;
     }
+    
+    getById(gameId) {
+      let that = this;
+      let promise = new Promise(function (resolve, reject) {
+        that.everlive.data('Game').getById(gameId)
+          .then(function (data) {
+            resolve(data.result);
+          }, reject);
+      });
+      
+      return promise;
+    }
 }
 
 module.exports = {

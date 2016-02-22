@@ -21,7 +21,13 @@ class CreateGameViewModel extends Observable {
         .then(function (currentUser) {
           return gamesService.createGame(currentUser.userId, currentUser.username, that.isPrivate, that.password);
         })
-        .then(resolve, reject);
+        .then(function (createdGame) {
+          return gamesService.getById(createdGame.result.Id);
+        }, reject)
+        .then(function (dbGame) {
+          dbGame.createdByMe = true;
+          resolve(dbGame);
+        }, reject);
     });
 
     return promise;
