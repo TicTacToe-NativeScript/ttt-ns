@@ -122,15 +122,15 @@ class UserService extends BaseService {
 
     return promise;
   }
-  
+
   getTopUsers(count) {
     let query = new this.el.Query()
-            .order({
-                'GamesWon': -1,
-                'GamesLost': 1
-            })
-            .take(count);
-    
+      .order({
+        'GamesWon': -1,
+        'GamesLost': 1
+      })
+      .take(count);
+
     let that = this;
     let promise = new Promise(function (resolve, reject) {
       that.everlive.Users.get(query)
@@ -138,7 +138,32 @@ class UserService extends BaseService {
           resolve(data.result);
         }, reject);
     });
-    
+
+    return promise;
+  }
+
+  updateCurrentUserScore(gameResult) {
+    let that = this;
+
+    let promise = new Promise(function (resolve, reject) {
+      that.getFullCurrentUserInfo()
+        .then(function (user) {
+          let updateObject = {
+            Id: user.Id,
+            GamesPlayed: user.GamesPlayed + 1
+          };
+
+          if (gameResult === 1) {
+            updateObject.GamesWon = user.GamesWon + 1;
+          }
+          else if (gameResult === 2) {
+            updateObject.GamesLost = user.GamesLost + 1;
+          }
+
+          that.everlive.Users.updateSingle(updateObject, resolve, reject);
+        });
+    });
+
     return promise;
   }
 }
