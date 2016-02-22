@@ -4,89 +4,108 @@ let userService = require('./user-service').defaultInstance;
 let pageSize = 10;
 
 class GamesService extends BaseService {
-  constructor(scheme) {
-    super(scheme);
-  }
+    constructor(scheme) {
+        super(scheme);
+    }
 
-  getGamesWaitingForPlayerForPage(page) {
-    page = page || 1;
-    let query = new this.el.Query()
-      .where({
-        'Player2Id': null
-      })
-      .order({
-        'CreatedAt': -1
-      })
-      .skip((page - 1) * pageSize)
-      .take(pageSize)
-      .expand({
-        Player1Id: true,
-        Player2Id: true
-      });
-      
-    let promise = new Promise((resolve, reject) => {
-      this.everlive.data('Game').get(query)
-        .then(function (data) {
-          console.dir(data);
-          resolve(data.result);
-        }, reject);
-    });
+    getGamesWaitingForPlayerForPage(page) {
+        page = page || 1;
+        let query = new this.el.Query()
+            .where({
+                'Player2Id': null
+            })
+            .order({
+                'CreatedAt': -1
+            })
+            .skip((page - 1) * pageSize)
+            .take(pageSize)
+            .expand({
+                Player1Id: true,
+                Player2Id: true
+            });
 
-    return promise;
-  }
+        let promise = new Promise((resolve, reject) => {
+            this.everlive.data('Game').get(query)
+                .then(function (data) {
+                    resolve(data.result);
+                }, reject);
+        });
 
-  getAllGamesForPage(page) {
-    page = page || 1;
-    let query = new this.el.Query()
-      .order({ 'CreatedAt': -1 })
-      .skip((page - 1) * pageSize)
-      .take(pageSize)
-      .expand({
-        Player1Id: true,
-        Player2Id: true
-      });
+        return promise;
+    }
 
-    this.everlive.data('Game').get(query)
-      .then(function (data) {
-        console.log('-----All games');
-        console.dir(data);
-      }, function (err) {
-        console.log('-----Error');
-        console.dir(err);
-      });
-  }
+    getAllGamesForPage(page) {
+        page = page || 1;
+        let query = new this.el.Query()
+            .order({ 'CreatedAt': -1 })
+            .skip((page - 1) * pageSize)
+            .take(pageSize)
+            .expand({
+                Player1Id: true,
+                Player2Id: true
+            });
 
-  createGame(playerOneId, playerOneName, isPrivate, password) {
-    let that = this;
-    let promise = new Promise(function (resolve, reject) {
-      userService.getCurrentUser()
-        .then(function (data) {
-          return Promise.resolve(data);
-        }, reject)
-        .then(function (currentUser) {
-          let games = that.everlive.data('Game');
+        this.everlive.data('Game').get(query)
+            .then(function (data) {
+                console.log('-----All games');
+                console.dir(data);
+            }, function (err) {
+                console.log('-----Error');
+                console.dir(err);
+            });
+    }
 
-          let gameToCreate = {
-            Board: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            IsPlayer1: true,
-            IsPublic: !isPrivate,
-            Player1Name: playerOneName,
-            Player1Id: playerOneId,
-            Passkey: password
-          };
+    createGame(playerOneId, playerOneName, isPrivate, password) {
+        let that = this;
+        let promise = new Promise(function (resolve, reject) {
+            userService.getCurrentUser()
+                .then(function (data) {
+                    return Promise.resolve(data);
+                }, reject)
+                .then(function (currentUser) {
+                    let games = that.everlive.data('Game');
 
-          games.create(gameToCreate, resolve, reject);
-        }, reject);
-    });
+                    let gameToCreate = {
+                        Board: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        IsPlayer1: true,
+                        IsPublic: !isPrivate,
+                        Player1Name: playerOneName,
+                        Player1Id: playerOneId,
+                        Passkey: password
+                    };
 
-    return promise;
-  }
+                    games.create(gameToCreate, resolve, reject);
+                }, reject);
+        });
+
+        return promise;
+    }
+    
+    setPlayer2ToGame(playerTwoId, playerTwoName, gameId) {
+        let that = this;
+        let promise = new Promise(function(resolve, reject) {
+            userService.getCurrentUser()
+                .then(function (data) {
+                    return Promise.resolve(data);
+                }, reject)
+                .then(function (currentUser) {
+                    let games = that.everlive.data('Game');
+
+                    games.updateSingle({ Id: gameId, 'Player2Id': currentUser, 'Player2Name': playerTwoName},
+                        function(res) {
+                            resolve();
+                        }, reject);
+                }, reject);
+        });
+        
+        return promise;
+    }
 }
 
 module.exports = {
-  GamesService: GamesService,
-  getGamesService: function (schema) {
-    return new GamesService(schema);
-  },
-  defaultInstance: new GamesService()
+    GamesService: GamesService,
+    getGamesService: function (schema) {
+        return new GamesService(schema);
+    },
+    defaultInstance: new GamesService()
 };

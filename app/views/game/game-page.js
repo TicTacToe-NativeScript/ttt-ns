@@ -10,12 +10,26 @@ let interval = null;
 function pageLoaded(args) {
     let page = args.object;
     page.bindingContext = viewModel;
-
-    interval = setInterval(ping, 2000);
 }
 
 function pageNavigatedTo(args) {
+    var game = args.context;
+    console.log("At pageNavigatedTo in Game Page CB")
+    console.dir(game);
 
+    viewModel.gameId = game.Id;
+
+    if (game.createdByMe) {
+        viewModel.iAmPlayerOne = true;
+        viewModel.firstPlayer.userName = game.Player1Id.DisplayName;
+    } else {
+        viewModel.iAmPlayerOne = false;
+        viewModel.secondPlayer.userName = 'Me';
+        
+        viewModel.setSecondPlayer()
+    }
+    
+    interval = setInterval(ping, 2000);
 }
 
 function disableBoard() {
@@ -97,7 +111,7 @@ function ping() {
     }, function (endResult) {
         console.log("At clear interval");
         clearInterval(interval);
-        
+
         dialogs.alert({
             title: 'Game over!',
             message: endResult.message,

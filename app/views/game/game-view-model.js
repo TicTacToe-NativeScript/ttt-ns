@@ -44,9 +44,9 @@ class GameViewModel extends Observable {
     }
 
     checkStatus(playCallback, endGameCallback) {
-        let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
+        let tempId = this.gameId;
         let that = this;
-        data.getById(tempId) //this.gameId)
+        data.getById(tempId)
             .then(function (data) {
                 var result = data.result;
                 var board = result.Board;
@@ -94,7 +94,7 @@ class GameViewModel extends Observable {
     }
 
     p1Won(message, callback) {
-        let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
+        let tempId = this.gameId;
         data.updateSingle({ Id: tempId, 'Player1Won': true, 'GameIsOver': true },
             function (res) {
                 callback({ message: message });
@@ -105,7 +105,7 @@ class GameViewModel extends Observable {
     }
 
     p2Won(message, callback) {
-        let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
+        let tempId = this.gameId;
         data.updateSingle({ Id: tempId, 'Player2Won': true, 'GameIsOver': true },
             function (res) {
                 callback({ message: message });
@@ -116,7 +116,7 @@ class GameViewModel extends Observable {
     }
 
     tie(message, callback) {
-        let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
+        let tempId = this.gameId;
         data.updateSingle({ Id: tempId, 'GameIsOver': true },
             function (res) {
                 callback({ message: message });
@@ -147,7 +147,7 @@ class GameViewModel extends Observable {
 
         this.dbBoard[pos] = markToPlace;
 
-        let tempId = "1e3a7730-d88b-11e5-8bca-093f125a03a4";
+        let tempId = this.gameId;
         data.updateSingle({ Id: tempId, 'IsPlayer1': !that.isPlayerOneTurn, 'Board': that.dbBoard },
             function (data) {
                 that.rebindBoard();

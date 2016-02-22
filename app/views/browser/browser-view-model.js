@@ -69,26 +69,6 @@ function navigate(selectedGame) {
     .navigate(navigationEntry);
 }
 
-function addGames(start, count) {
-  let games = new ObservableArray([]);
-
-  for (let i = 0; i < count; i++) {
-    let game = {
-      id: start + i,
-      isPrivate: i % 2 === 0 ? true : false,
-      password: '123',
-      creator: {
-        userName: `Player ${start + i + 1}`,
-        wins: Math.random() * 10 | 0,
-        losses: Math.random() * 10 | 0
-      }
-    };
-
-    games.push(game);
-  }
-
-  return games;
-}
 
 module.exports = {
   browserViewModel: new BrowserViewModel()
