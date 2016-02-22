@@ -2,7 +2,6 @@
 
 let Observable = require("data/observable").Observable;
 let frame = require("ui/frame");
-let Everlive = require("../../lib/everlive.all.min.js");
 let userService = require('../../services/user-service').getUserService('https');
 
 class SignupViewModel extends Observable {

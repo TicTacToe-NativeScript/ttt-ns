@@ -1,6 +1,6 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="onNavigatedTo">
   <StackLayout>
-    <Label text="LE HOME" textWrap="true" />
+    <Label text="Ultimate Tic Tac Toe" class="title" textWrap="true" />
     <Button text="Join game" tap="btnJoinGameTapped" />
     <Button text="Create new game" tap="btnCreateGameTapped" />  
     <Button text="Profile" tap="btnProfileTapped" />      
