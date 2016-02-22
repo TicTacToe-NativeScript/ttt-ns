@@ -34,6 +34,8 @@ class GameViewModel extends Observable {
 
         this.gameId = "";
 
+        this.rebindBoard();
+
         el = new Everlive(globals.BS_API_KEY);
         data = el.data('Game');
 
@@ -44,7 +46,7 @@ class GameViewModel extends Observable {
         let tempId = this.gameId;
         let that = this;
         let outResult = {};
-        
+
         data.getById(tempId)
             .then(function (data) {
                 var result = data.result;
@@ -58,12 +60,12 @@ class GameViewModel extends Observable {
                     that.dbBoard = board;
                     that.rebindBoard();
                 }
-                
-                if(!that.hasSecondPlayer) {
-                    if(result.Player2Id) {
+
+                if (!that.hasSecondPlayer) {
+                    if (result.Player2Id) {
                         that.set("hasSecondPlayer", true);
                         that.set("secondPlayer", result.Player2Name);
-                        outResult.hasSecondPlayer = true; 
+                        that.set("firstPlayer", result.Player2Name);
                     }
                 }
 
@@ -150,13 +152,13 @@ class GameViewModel extends Observable {
                 message: 'You cannot make this move!'
             }
         }
-        
-        if(!this.hasSecondPlayer) {
+
+        if (!this.hasSecondPlayer) {
             return {
                 message: 'Wait for a player to join!'
             };
         }
-        
+
         console.log(that.firstPlayer + ' vs ' + that.secondPlayer);
         
         // if ((this.iAmPlayerOne && !this.isPlayerOneTurn) || (!this.iAmPlayerOne && this.isPlayerOneTurn)) {
@@ -166,6 +168,13 @@ class GameViewModel extends Observable {
         //     }
         // }
         
+        if ((!this.iAmPlayerOne && this.isPlayerOneTurn) || (this.iAmPlayerOne && !this.isPlayerOneTurn)) {
+            return {
+                success: false,
+                message: "It's not your turn!"
+            };
+        }
+
         this.dbBoard[pos] = markToPlace;
 
         let tempId = this.gameId;

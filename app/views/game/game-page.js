@@ -42,7 +42,6 @@ function pageNavigatedTo(args) {
 }
 
 function pageNavigatedFrom(args) {
-    console.dir(args);
     console.log("At navigating from");
     clearInterval(interval);
 }

@@ -35,7 +35,6 @@
         </StackLayout>
     </GridLayout>
     <StackLayout row="2">
-        <Label text="{{ isPlayerOneTurn ? secondPlayer + '\'s turn' : firstPlayer + '\'s turn'}}" textWrap="true" cssClass="title" />
     </StackLayout>
   </GridLayout>
 </Page>
