@@ -95,6 +95,24 @@ class UserService extends BaseService {
     return promise;
   }
 
+  getFullCurrentUserInfo() {
+    let that = this;
+    let promise = new Promise(function (resolve, reject) {
+      that.getCurrentUser()
+        .then(function (currentUser) {
+          return Promise.resolve(currentUser);
+        }, reject)
+        .then(function (currentUser) {
+          that.everlive.Users.getById(currentUser.userId)
+            .then(function (fullUser) {
+              resolve(fullUser.result);
+            }, reject);
+        });
+    });
+
+    return promise;
+  }
+
   getCurrentUser() {
     let promise = Promise.resolve({
       token: applicationSettings.getString(globals.TOKEN_DATA_KEY),

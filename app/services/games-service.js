@@ -27,7 +27,6 @@ class GamesService extends BaseService {
     let promise = new Promise((resolve, reject) => {
       this.everlive.data('Game').get(query)
         .then(function (data) {
-          console.dir(data);
           resolve(data.result);
         }, reject);
     });

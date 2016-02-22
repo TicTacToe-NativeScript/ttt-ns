@@ -8,11 +8,20 @@ let userService = require('../../services/user-service').defaultInstance;
 class ProfileViewModel extends Observable {
   constructor() {
     super();
-    
+
     this.gameResults = new ObservableArray([]);
     this.currentGameResultIndex = 0;
     this.currentGameResult = null;
     this.currentUser = null;
+    let that = this;
+
+    userService.getFullCurrentUserInfo()
+      .then(function (user) {
+        that.set('currentUser', user);
+      }, function (err) {
+        console.log('--------Error while loading the current user information.');
+        console.dir(err);
+      });
   }
 
   loadGameResults() {
@@ -24,7 +33,7 @@ class ProfileViewModel extends Observable {
           return Promise.resolve(currentUser);
         })
         .then(function (user) {
-          return sqliteDbHandler.getGameResultsForUser(1);
+          return sqliteDbHandler.getGameResultsForUser(user.userId);
         }, reject)
         .then(function (data) {
           data.forEach(function (element, index) {

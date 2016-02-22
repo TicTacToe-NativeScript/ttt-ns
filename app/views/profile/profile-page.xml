@@ -1,12 +1,12 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   <StackLayout>
-    <Label class="title" text="{{ currentUser.username }}" textWrap="true" /> 
+    <Label class="title" text="{{ currentUser.DisplayName }}" textWrap="true" /> 
     <GridLayout rows="50" columns="*, *, *">
       <StackLayout orientation="horizontal" row="0" col="1">
         <Image src="~/resources/images/crown.png" stretch ="none" />
-        <Label class="label-user" text="{{ currentUser.wins || 3 }}" textWrap="true" />
+        <Label class="label-user" text="{{ currentUser.GamesWon }}" textWrap="true" />
         <Image src="~/resources/images/skull.png" stretch ="none" />
-        <Label class="label-user" text="{{ currentUser.losses || 2 }}" textWrap="true" />
+        <Label class="label-user" text="{{ currentUser.GamesLost }}" textWrap="true" />
       </StackLayout>
     </GridLayout>
     <Label class="title" text="Game Results" textWrap="true" />
