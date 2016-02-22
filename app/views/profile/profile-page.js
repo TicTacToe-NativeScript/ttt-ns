@@ -10,36 +10,49 @@ let gestures = require("ui/gestures");
 let Color = require('color').Color;
 let moment = require('moment');
 let animations = require('nativescript-effects');
+let gridId = 'result-grid';
 
 function pageLoaded(args) {
   var page = args.object;
   page.bindingContext = viewModel;
 
+  let container = page.getViewById('slResultContainer');
+  container.on(gestures.GestureTypes.swipe, function (args) {
+    let direction = args.direction;
+
+    if (direction === 1) {
+      if (viewModel.currentGameResultIndex <= 0) {
+        return;
+      }
+
+      viewModel.currentGameResultIndex -= 1;
+      displayGameResult(container, viewModel.currentGameResultIndex || 0, 'right');
+    }
+    else {
+      let length = viewModel.gameResults.length;
+      if (viewModel.currentGameResultIndex >= length - 1) {
+        return;
+      }
+
+      viewModel.currentGameResultIndex += 1;
+      displayGameResult(container, viewModel.currentGameResultIndex || 0, 'left');
+    }
+  });
+
   viewModel.loadGameResults()
     .then(function () {
-      displayGameResult(page, 0, 'left');
+      displayGameResult(container, 0, 'left');
     }, function (err) {
       console.dir(err);
     });
 }
 
-function displayGameResult(page, index, direction) {
+function displayGameResult(container, index, animationDirection) {
   viewModel.currentGameResultIndex = index;
-  let container = page.getViewById('slResultContainer');
   container.removeChildren();
-  container.on(gestures.GestureTypes.swipe, function (args) {
-    let direction = args.direction;
-    if (direction === 1) {
-      viewModel.currentGameResultIndex -= 1;
-      displayGameResult(page, viewModel.currentGameResultIndex || 0, 'right');
-    }
-    else {
-      viewModel.currentGameResultIndex += 1;
-      displayGameResult(page, viewModel.currentGameResultIndex || 0, 'left');
-    }
-  });
 
   let grid = new GridLayout();
+  grid.id = gridId;
   let currentGameResult = viewModel.gameResults.getItem(index);
 
   let row = 0;
@@ -71,14 +84,14 @@ function displayGameResult(page, index, direction) {
 
   let labelDescription = new Label();
 
-  labelDescription.text = `${currentGameResult.playerOneUsername} vs ${currentGameResult.playerTwoUsername} - ${moment(currentGameResult.playedOn).format('YYYY-MM-DD hh:mm') }`;
+  labelDescription.text = `[O] ${currentGameResult.playerOneUsername} vs [X] ${currentGameResult.playerTwoUsername} - ${moment(currentGameResult.playedOn).format('YYYY-MM-DD hh:mm:ss') }`;
   labelDescription.textWrap = true;
 
   container.addChild(labelDescription);
 
   container.addChild(grid);
   grid.opacity = 0;
-  grid.floatIn(1000, direction);
+  grid.floatIn(300, animationDirection);
 }
 
 module.exports = {
