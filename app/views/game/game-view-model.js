@@ -13,13 +13,9 @@ let marks = [' ', 'X', 'O'];
 class GameViewModel extends Observable {
     constructor() {
         super();
-        this.firstPlayer = {
-            userName: 'First Player'
-        };
+        this.firstPlayer = 'First Player';
 
-        this.secondPlayer = {
-            userName: 'Second Player'
-        };
+        this.secondPlayer = 'Second Player';
 
         this.dbBoard = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         this.cell0 = '';
@@ -34,6 +30,7 @@ class GameViewModel extends Observable {
 
         this.isPlayerOneTurn = true;
         this.iAmPlayerOne = true;
+        this.hasSecondPlayer = false;
 
         this.gameId = "";
 
@@ -46,6 +43,8 @@ class GameViewModel extends Observable {
     checkStatus(playCallback, endGameCallback) {
         let tempId = this.gameId;
         let that = this;
+        let outResult = {};
+        
         data.getById(tempId)
             .then(function (data) {
                 var result = data.result;
@@ -60,7 +59,12 @@ class GameViewModel extends Observable {
                     that.rebindBoard();
                 }
                 
-                console.log(result);
+                if(!that.hasSecondPlayer) {
+                    if(result.Player2Id) {
+                        that.set("hasSecondPlayer", true);
+                        outResult.hasSecondPlayer = true; 
+                    }
+                }
 
                 if (!that.canMakeAnyMoves() || that.checkIfGameOver(1) == 1 || that.checkIfGameOver(2) == 2) {
                     console.log("Inside end game condition");
@@ -87,7 +91,7 @@ class GameViewModel extends Observable {
                             break;
                     }
                 } else {
-                    playCallback(result);
+                    playCallback(outResult);
                 }
 
             }, function (err) {
@@ -137,22 +141,21 @@ class GameViewModel extends Observable {
     placeMark(pos, callback) {
         let markToPlace = this.isPlayerOneTurn ? 1 : 2;
         let that = this;
-        let success = false;
         let result = {};
 
         if (this.dbBoard[pos] > 0) {
             return {
-                success: success,
+                success: false,
                 message: 'You cannot make this move!'
             }
         }
         
-        if ((this.iAmPlayerOne && !this.isPlayerOneTurn) || (!this.iAmPlayerOne && this.isPlayerOneTurn)) {
-            return {
-                success: success,
-                message: "It's not your turn!"
-            }
-        }
+        // if ((this.iAmPlayerOne && !this.isPlayerOneTurn) || (!this.iAmPlayerOne && this.isPlayerOneTurn)) {
+        //     return {
+        //         success: success,
+        //         message: "It's not your turn!"
+        //     }
+        // }
         
         this.dbBoard[pos] = markToPlace;
 
@@ -221,8 +224,3 @@ class GameViewModel extends Observable {
 module.exports = {
     gameViewModel: new GameViewModel()
 };
-
-
-//  0  1  2
-//  3  4  5
-//  6  7  8

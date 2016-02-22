@@ -1,9 +1,9 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo" navigatingFrom="pageNavigatingFrom">
   <GridLayout rows="1*, 5*, 1*">
     <StackLayout orientation="horizontal" row="0">
         <Label text="{{ iAmPlayerOne && isPlayerOneTurn ? 'It is your turn, ' : '' }}" textWrap="true" />
     <StackLayout orientation="horizontal" cssClass="horizontal-line"/>
-        <Label text="{{ secondPlayer.userName + '(O)s'  + iAmPlayerOne ? '' : 'It\'s your turn, '}}" textWrap="true" />
+        <Label text="{{ iAmPlayerOne && !isPlayerOneTurn ? '' : 'It\'s your turn, '}}" textWrap="true" />
     </StackLayout>
     <GridLayout rows="*, *, *" columns="*, *, *" borderColor="black" borderWidth="2" row="1">
         <StackLayout tap="tapCell0" row="0" col="0" borderColor="black" borderWidth="2">
@@ -35,7 +35,7 @@
         </StackLayout>
     </GridLayout>
     <StackLayout row="2">
-        <Label text="{{ isPlayerOneTurn ? firstPlayer.userName : secondPlayer.userName + '\'s turn'}}" textWrap="true" />
+        <Label text="{{ isPlayerOneTurn ? firstPlayer : secondPlayer + '\'s turn'}}" textWrap="true" />
     </StackLayout>
   </GridLayout>
 </Page>

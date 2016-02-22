@@ -16,20 +16,18 @@ function pageLoaded(args) {
 
 function pageNavigatedTo(args) {
     var game = args.context;
-    console.log("At pageNavigatedTo in Game Page CB");
-    
     viewModel.gameId = game.Id;
 
     if (game.createdByMe) {
-        viewModel.iAmPlayerOne = true;
-        viewModel.firstPlayer.userName = game.Player1Id.DisplayName;
+        viewModel.set("iAmPlayerOne", true);
+        viewModel.set('firstPlayer', game.Player1Id.DisplayName);
     } else {
         userService.getCurrentUser()
             .then(function (res) {
                 gamesService.setPlayer2ToGame(res.userId, res.username, game.Id)
                     .then(function (res) {
-                        viewModel.iAmPlayerOne = false;
-                        viewModel.secondPlayer.userName = res.username;
+                        viewModel.set("iAmPlayerOne", false);
+                        viewModel.set('secondPlayer', res.username);
                     }, function (err) {
                         console.log("error in setting 2nd player to game");
                         console.log(err);
@@ -41,6 +39,12 @@ function pageNavigatedTo(args) {
     }
 
     interval = setInterval(ping, 2000);
+}
+
+function pageNavigatingFrom(args) {
+    console.dir(args);
+    console.log("At navigating from");
+    clearInterval(interval);
 }
 
 function removeCellEvent(args) {
@@ -114,7 +118,9 @@ function tapCell8(viewArgs) {
 
 function ping() {
     viewModel.checkStatus(function (result) {
-        console.log("At checkStatus");
+        if (result.hasSecondPlayer) {
+            alert("A player joined!");
+        }
     }, function (endResult) {
         console.log("At clear interval");
         clearInterval(interval);
@@ -131,7 +137,7 @@ function ping() {
         });
     });
 
-    console.log("Ping");
+    console.log(new Date());
 }
 
 module.exports = {
