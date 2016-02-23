@@ -62,3 +62,11 @@ label {
     margin-bottom: 20;
     background-color: black;
 }
+
+#gameBoardGrid {
+    background-color: white;
+}
+
+#gamePageGrid, #createGamePageStack {
+    background-color: antiquewhite
+}

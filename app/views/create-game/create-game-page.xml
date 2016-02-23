@@ -1,5 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo">
-  <StackLayout class="vertical-center">
+  <StackLayout class="vertical-center" id="createGamePageStack">
       <StackLayout orientation="horizontal" class="horizontal-center">
           <Label text="Private game" textWrap="true" />
           <Switch checked="{{ isPrivate }}" />

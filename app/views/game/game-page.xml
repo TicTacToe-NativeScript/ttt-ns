@@ -1,11 +1,11 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo" navigatedFrom="pageNavigatedFrom">
-  <GridLayout rows="1*, 5*, 1*">
+  <GridLayout rows="1*, 5*, 1*" id="gamePageGrid">
     <StackLayout orientation="horizontal" row="0">
         <Label text="{{ iAmPlayerOne && isPlayerOneTurn ? 'It is your turn ' : ' ' }}" textWrap="true" cssClass="title" />
     <StackLayout orientation="horizontal" cssClass="horizontal-line"/>
         <Label text="{{ !iAmPlayerOne && !isPlayerOneTurn ? 'It is your turn ' : ' '}}" textWrap="true" cssClass="title" />
     </StackLayout>
-    <GridLayout rows="*, *, *" columns="*, *, *" borderColor="black" borderWidth="2" row="1">
+    <GridLayout rows="*, *, *" columns="*, *, *" borderColor="black" borderWidth="2" row="1" id="gameBoardGrid">
         <StackLayout tap="tapCell0" row="0" col="0" borderColor="black" borderWidth="2">
             <Label text="{{ cell0 }}"  textWrap="true" cssClass="title" />
         </StackLayout>
