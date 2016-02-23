@@ -6,11 +6,7 @@ let viewModel;
 
 function pageLoaded(args) {
     let page = args.object;
-    if (viewModel == null) {
-        viewModel = new BrowserViewModel();
-    }
-
-    page.bindingContext = viewModel;
+    page.bindingContext = new BrowserViewModel();
 }
 
 function pageNavigatedTo(args) {
