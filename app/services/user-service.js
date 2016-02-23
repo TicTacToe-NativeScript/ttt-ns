@@ -125,10 +125,7 @@ class UserService extends BaseService {
 
   getTopUsers(count) {
     let query = new this.el.Query()
-      .order({
-        'GamesWon': -1,
-        'GamesLost': 1
-      })
+      .orderDesc('GamesWon')
       .take(count);
 
     let that = this;

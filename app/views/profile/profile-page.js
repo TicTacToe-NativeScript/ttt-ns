@@ -69,7 +69,7 @@ function displayGameResult(container, index, animationDirection) {
     if (item === 1) {
       image.src = '~/resources/images/circle-big.png';
     }
-    else {
+    else if (item === 2) {
       image.src = '~/resources/images/x-mark-big.png';
     }
 
@@ -87,6 +87,7 @@ function displayGameResult(container, index, animationDirection) {
 
   labelDescription.text = `[O] ${currentGameResult.playerOneUsername} vs [X] ${currentGameResult.playerTwoUsername} - ${moment(currentGameResult.playedOn).format('YYYY-MM-DD hh:mm:ss') }`;
   labelDescription.textWrap = true;
+  labelDescription.className = 'label-description';
 
   container.addChild(labelDescription);
 
