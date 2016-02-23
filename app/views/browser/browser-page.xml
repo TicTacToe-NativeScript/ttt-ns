@@ -4,14 +4,16 @@
     <ListView items="{{games}}" itemLoading="onItemLoading" loadMoreItems="{{loadMoreItems}}" itemTap="{{navigateToGamePage}}">
       <ListView.itemTemplate>
         <StackLayout style="padding: 10;" orientation="horizontal">
-            <Label class="label-user" text="{{ Player1Id.DisplayName }}" textWrap="true" />
-            <StackLayout orientation="horizontal">
-                <Image src="~/resources/images/crown.png" stretch ="none" />
-                <Label class="label-user" text="{{ Player1Id.GamesWon }}" textWrap="true" />
-                <Image src="~/resources/images/skull.png" stretch ="none" />
-                <Label class="label-user" text="{{ Player1Id.GamesLost }}" textWrap="true" />
-                <Image src="{{ !IsPublic ? '~/resources/images/private.png' : '~/resources/images/public.png' }}" stretch ="none" />
-            </StackLayout>
+            <GridLayout columns="3*, 2*, 2*">
+                <Label class="label-user" text="{{ Player1Id.DisplayName }}" col="0" textWrap="true" />
+                <StackLayout orientation="horizontal" col="1">
+                    <Image src="~/resources/images/crown.png" stretch ="none" />
+                    <Label class="label-user" text="{{ Player1Id.GamesWon }}" textWrap="true" />
+                    <Image src="~/resources/images/skull.png" stretch ="none" />
+                    <Label class="label-user" text="{{ Player1Id.GamesLost }}" textWrap="true" />
+                </StackLayout>
+                <Image src="{{ !IsPublic ? '~/resources/images/private.png' : '~/resources/images/public.png' }}" col="2" stretch ="none" />
+            </GridLayout>
         </StackLayout>
       </ListView.itemTemplate>
     </ListView>

@@ -1,5 +1,5 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="onNavigatedTo">
-  <StackLayout>
+  <StackLayout cssClass="horizontal-center">
       <Label text="Login" class="title" textWrap="true" />
       <TextField hint="Email" keyboardType="email" text="{{ email }}" />
       <TextField hint="Password" secure="true" text="{{ password }}" row="1" />

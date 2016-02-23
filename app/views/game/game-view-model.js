@@ -213,7 +213,7 @@ class GameViewModel extends Observable {
       return {
         success: false,
         message: 'You cannot make this move!'
-      }
+      };
     }
 
     if (!this.hasSecondPlayer) {
@@ -250,35 +250,19 @@ class GameViewModel extends Observable {
         result.success = false;
         result.message = error;
 
-        callback(result)
+        callback(result);
       });
   }
 
   checkIfGameOver(player) {
-    if ((this.dbBoard[0] == player
-      && this.dbBoard[1] == player
-      && this.dbBoard[2] == player) ||
-      (this.dbBoard[0] == player
-        && this.dbBoard[4] == player
-        && this.dbBoard[8] == player) ||
-      (this.dbBoard[0] == player
-        && this.dbBoard[3] == player
-        && this.dbBoard[6] == player) ||
-      (this.dbBoard[6] == player
-        && this.dbBoard[7] == player
-        && this.dbBoard[8] == player) ||
-      (this.dbBoard[6] == player
-        && this.dbBoard[4] == player
-        && this.dbBoard[2] == player) ||
-      (this.dbBoard[2] == player
-        && this.dbBoard[5] == player
-        && this.dbBoard[8] == player) ||
-      (this.dbBoard[1] == player
-        && this.dbBoard[4] == player
-        && this.dbBoard[7] == player) ||
-      (this.dbBoard[3] == player
-        && this.dbBoard[4] == player
-        && this.dbBoard[5] == player)) {
+    if ((this.dbBoard[0] == player && this.dbBoard[1] == player && this.dbBoard[2] == player) ||
+      (this.dbBoard[0] == player && this.dbBoard[4] == player && this.dbBoard[8] == player) ||
+      (this.dbBoard[0] == player && this.dbBoard[3] == player && this.dbBoard[6] == player) ||
+      (this.dbBoard[6] == player && this.dbBoard[7] == player && this.dbBoard[8] == player) ||
+      (this.dbBoard[6] == player && this.dbBoard[4] == player && this.dbBoard[2] == player) ||
+      (this.dbBoard[2] == player && this.dbBoard[5] == player && this.dbBoard[8] == player) ||
+      (this.dbBoard[1] == player && this.dbBoard[4] == player && this.dbBoard[7] == player) ||
+      (this.dbBoard[3] == player && this.dbBoard[4] == player && this.dbBoard[5] == player)) {
       return player;
     } else {
       return 0;
@@ -287,7 +271,7 @@ class GameViewModel extends Observable {
 
   canMakeAnyMoves() {
     for (let i = 0; i < this.dbBoard.length; i++) {
-      if (this.dbBoard[i] == 0) {
+      if (this.dbBoard[i] === 0) {
         return true;
       }
     }

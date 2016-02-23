@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" navigatedTo="pageNavigatedTo">
-  <StackLayout>
-      <StackLayout orientation="horizontal">
+  <StackLayout class="vertical-center">
+      <StackLayout orientation="horizontal" class="horizontal-center">
           <Label text="Private game" textWrap="true" />
           <Switch checked="{{ isPrivate }}" />
       </StackLayout>

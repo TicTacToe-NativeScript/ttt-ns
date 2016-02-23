@@ -37,3 +37,28 @@ label {
 .label-description {
   font-size: 20;
 } 
+
+.vertical-center {
+    vertical-align: center;
+}
+
+.bold-title {
+    font-weight: bold;
+    font-size: 28;
+    text-align: center
+}
+
+.horizontal-center {
+    horizontal-align: center;
+}
+
+.empty-line {
+    height: 30px;
+}
+
+.horizontal-line {
+    height: 5px;
+    margin-top: 20;
+    margin-bottom: 20;
+    background-color: black;
+}
