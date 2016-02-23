@@ -58,5 +58,6 @@ class ProfileViewModel extends Observable {
 }
 
 module.exports = {
+  ProfileViewModel: ProfileViewModel,
   profileViewModel: new ProfileViewModel()
 };

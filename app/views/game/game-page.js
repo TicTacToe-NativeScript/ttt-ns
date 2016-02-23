@@ -39,7 +39,7 @@ function pageNavigatedTo(args) {
             });
     }
 
-    interval = setInterval(ping, 2000);
+    interval = setInterval(ping, 1000);
 }
 
 function pageNavigatedFrom(args) {

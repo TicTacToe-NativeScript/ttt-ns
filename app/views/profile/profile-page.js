@@ -1,6 +1,6 @@
 'use strict';
 
-let viewModel = require('./profile-view-model').profileViewModel;
+let ProfileViewModel = require('./profile-view-model').ProfileViewModel;
 let GridLayout = require('ui/layouts/grid-layout').GridLayout;
 let ItemSpec = require('ui/layouts/grid-layout').ItemSpec;
 let GridUnitType = require('ui/layouts/grid-layout').GridUnitType;
@@ -11,10 +11,11 @@ let Color = require('color').Color;
 let moment = require('moment');
 let animations = require('nativescript-effects');
 let gridId = 'result-grid';
+let viewModel;
 
 function pageLoaded(args) {
   var page = args.object;
-  let label = new Label();
+  viewModel = new ProfileViewModel();
   page.bindingContext = viewModel;
 
   let container = page.getViewById('slResultContainer');
@@ -54,6 +55,9 @@ function displayGameResult(container, index, animationDirection) {
 
   let grid = new GridLayout();
   grid.id = gridId;
+  grid.borderColor = new Color('black');
+  grid.borderWidth = 1;
+  
   let currentGameResult = viewModel.gameResults.getItem(index);
 
   let row = 0;
