@@ -56,7 +56,7 @@ class SQLiteDbHandler {
       dbPromise
         .then(function (db) {
           db.resultType(SQLite.RESULTSASOBJECT);
-          return db.all('select * from GameResults where playerOneId = ? or playerTwoId = ?', [userId]);
+          return db.all('select * from GameResults where playerOneId = ? or playerTwoId = ?', [userId, userId]);
         }, reject)
         .then(function (result) {
           let gameResults = [];
